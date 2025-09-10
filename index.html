@@ -286,6 +286,10 @@
           <h3>Robot Soldadura Laser</h3>
           <p class="small muted">Acabados uniformes y profesionales.</p>
         </article>
+
+        <div class="yt-video" data-id="Nl5rWxzrkeY"></div>
+        <div class="yt-video" data-id="YKEyKWizZYY"></div>
+        <div class="yt-video" data-id="GD_WeCi4570"></div>
       </div>
     </section>
 
@@ -413,6 +417,27 @@
       }
       // Si reemplazas VIDEO_ID por el id real, el iframe cargará el video correctamente.
     })();
+
+
+    document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll(".yt-video").forEach(function(el){
+      let videoId = el.getAttribute("data-id");
+      let iframe = document.createElement("iframe");
+      iframe.setAttribute("src", 
+        "https://www.youtube.com/embed/" + videoId + 
+        "?autoplay=1&mute=1&controls=0&loop=1&playlist=" + videoId + 
+        "&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0"
+      );
+      iframe.setAttribute("title", "Video publicitario Robots Colombia");
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("allow", "autoplay; encrypted-media");
+      iframe.setAttribute("allowfullscreen", "true");
+      iframe.style.width = "100%";
+      iframe.style.aspectRatio = "1/1.5"; // o "1/2" para vertical
+      iframe.style.border = "0";
+      el.appendChild(iframe);
+    });
+  });
   </script>
 </body>
 </html>
