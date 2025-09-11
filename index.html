@@ -167,7 +167,7 @@
         color: var(--brand-1);
       }
       
-      /* 🔹 Galería de imágenes */
+      /* 🔹 Galería */
       .gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* máximo 3 por fila */
@@ -175,32 +175,39 @@
         flex: 1 1 100%;
       }
       
-      /* imágenes normales (3 por fila) */
+      /* imágenes normales (3 por fila → cuadradas) */
       .gallery > * {
         grid-column: span 1;
-      }
-      
-      /* si queda 1 sola al final → ocupa toda la fila */
-      .gallery > *:nth-last-child(1):nth-child(3n+1) {
-        grid-column: 1 / -1;
-      }
-      
-      /* si quedan 2 al final → cada una ocupa la mitad */
-      .gallery > *:nth-last-child(2):nth-child(3n+1),
-      .gallery > *:nth-last-child(1):nth-child(3n+2) {
-        grid-column: span 2;
       }
       
       .gallery img {
         width: 100%;
         height: 100%;
-        aspect-ratio: 1 / 1; /* cuadradas */
+        aspect-ratio: 1 / 1; /* cuadradas por defecto */
         object-fit: cover;
         border-radius: 10px;
         box-shadow: var(--shadow);
       }
       
-      /* 🔹 En móvil → todas en columna */
+      /* 🔹 Si queda 1 sola al final → ocupa toda la fila con su proporción */
+      .gallery > *:nth-last-child(1):nth-child(3n+1) img {
+        aspect-ratio: auto;
+        height: auto;
+      }
+      
+      /* 🔹 Si quedan 2 al final → cada una ocupa la mitad con su proporción */
+      .gallery > *:nth-last-child(2):nth-child(3n+1),
+      .gallery > *:nth-last-child(1):nth-child(3n+2) {
+        grid-column: span 2;
+      }
+      
+      .gallery > *:nth-last-child(2):nth-child(3n+1) img,
+      .gallery > *:nth-last-child(1):nth-child(3n+2) img {
+        aspect-ratio: auto;
+        height: auto;
+      }
+      
+      /* 🔹 En móvil → todas en columna, manteniendo proporción natural */
       @media (max-width: 768px) {
         .gallery {
           grid-template-columns: 1fr;
@@ -209,9 +216,12 @@
         .gallery > * {
           grid-column: span 1 !important;
         }
+      
+        .gallery img {
+          aspect-ratio: auto;
+          height: auto;
+        }
       }
-
-
   </style>
 </head>
 <body>
