@@ -144,6 +144,45 @@
       /* Small helpers */
       .muted{ color:var(--muted) }
       .small{ font-size:0.9rem; color:var(--muted) }
+
+      /* 3 imagenes */
+      .stats-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+      
+      .stat {
+        flex: 1 1 120px;
+        background: linear-gradient(180deg,#fff,#f6fbff);
+        padding: 12px 16px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+      }
+      
+      .stat .value {
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--brand-1);
+      }
+      
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        flex: 1 1 100%;
+      }
+      
+      .gallery img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1 / 1; /* cuadradas */
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+      }
+
   </style>
 </head>
 <body>
@@ -200,21 +239,11 @@
             <div class="small muted">Capacidad por lámina</div>
           </div>
 
-          <!-- 3 imagenes -->
-          <div style="width:177px; height:177px; overflow:hidden;">
-            <img src="https://robotscolombia.onrender.com/corte/siluetas-microperforadas.jpg" 
-                 alt="Robots Colombia" 
-                 style="width:100%; height:100%; object-fit:cover;">
-          </div>
-          <div style="width:177px; height:177px; overflow:hidden;">
-            <img src="https://robotscolombia.onrender.com/corte/lamina-microperforada-personalizada.jpg" 
-                 alt="Robots Colombia" 
-                 style="width:100%; height:100%; object-fit:cover;">
-          </div>
-          <div style="width:177px; height:177px; overflow:hidden;">
-            <img src="https://robotscolombia.onrender.com/corte/paneles-lisos-microperforados.jpg" 
-                 alt="Robots Colombia" 
-                 style="width:100%; height:100%; object-fit:cover;">
+          <!-- 3 imágenes -->
+          <div class="gallery">
+            <img src="https://robotscolombia.onrender.com/corte/siluetas-microperforadas.jpg" alt="Robots Colombia">
+            <img src="https://robotscolombia.onrender.com/corte/lamina-microperforada-personalizada.jpg" alt="Robots Colombia">
+            <img src="https://robotscolombia.onrender.com/corte/paneles-lisos-microperforados.jpg" alt="Robots Colombia">
           </div>
         </div>
       </div>
