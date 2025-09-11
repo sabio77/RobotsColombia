@@ -196,10 +196,16 @@
         grid-column: 1 / -1;
       }
       
-      /* Caso: sobran 2 → cada una ocupa la mitad con proporción real */
+      /* Caso: sobran 2 → que compartan la fila (cada una 50%) */
       .gallery > *:nth-last-child(2):nth-child(3n+1),
       .gallery > *:last-child:nth-child(3n+2) {
-        grid-column: span 2;
+        grid-column: span 1;   /* 👈 solo ocupan una columna cada una */
+      }
+      
+      .gallery > *:nth-last-child(2):nth-child(3n+1) img,
+      .gallery > *:last-child:nth-child(3n+2) img {
+        aspect-ratio: auto;
+        height: auto;
       }
       
       /* En móvil → todas en columna con proporción real */
