@@ -145,7 +145,7 @@
       .muted{ color:var(--muted) }
       .small{ font-size:0.9rem; color:var(--muted) }
 
-      /* 3 imagenes */
+      /* 🔹 Stats */
       .stats-gallery {
         display: flex;
         flex-wrap: wrap;
@@ -175,54 +175,47 @@
         flex: 1 1 100%;
       }
       
-      /* imágenes normales (3 por fila → cuadradas) */
-      .gallery > * {
-        grid-column: span 1;
-      }
-      
+      /* Estilo base de imágenes */
       .gallery img {
         width: 100%;
-        aspect-ratio: 1 / 1; /* cuadradas por defecto */
+        height: auto;
         object-fit: cover;
         border-radius: 10px;
         box-shadow: var(--shadow);
       }
       
-      /* 🔹 Caso: sobra 1 (ocupa todo el ancho con proporción real) */
+      /* Por defecto → cuadradas (solo cuando la fila está completa con 3) */
+      .gallery > *:not(:last-child:nth-child(3n+1))
+             :not(:nth-last-child(2):nth-child(3n+1))
+             :not(:last-child:nth-child(3n+2)) img {
+        aspect-ratio: 1 / 1;
+      }
+      
+      /* Caso: sobra 1 → ocupa todo el ancho con proporción real */
       .gallery > *:last-child:nth-child(3n+1) {
         grid-column: 1 / -1;
       }
-      .gallery > *:last-child:nth-child(3n+1) img {
-        aspect-ratio: auto;
-        height: auto;
-      }
-
-      /* 🔹 Caso: sobran 2 (ocupan mitad y mitad con proporción real) */
+      
+      /* Caso: sobran 2 → cada una ocupa la mitad con proporción real */
       .gallery > *:nth-last-child(2):nth-child(3n+1),
       .gallery > *:last-child:nth-child(3n+2) {
         grid-column: span 2;
       }
-      .gallery > *:nth-last-child(2):nth-child(3n+1) img,
-      .gallery > *:last-child:nth-child(3n+2) img {
-        aspect-ratio: auto;
-        height: auto;
-      }
-
-      /* 🔹 En móvil → todas en columna, manteniendo proporción natural */
+      
+      /* En móvil → todas en columna con proporción real */
       @media (max-width: 768px) {
         .gallery {
           grid-template-columns: 1fr;
         }
-      
         .gallery > * {
           grid-column: span 1 !important;
         }
-      
         .gallery img {
-          aspect-ratio: auto;
+          aspect-ratio: auto !important;
           height: auto;
         }
       }
+
   </style>
 </head>
 <body>
