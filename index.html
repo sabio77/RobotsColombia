@@ -189,24 +189,26 @@
         box-shadow: var(--shadow);
       }
       
-      /* 🔹 Si queda 1 sola al final → ocupa toda la fila con su proporción */
-      .gallery > *:nth-last-child(1):nth-child(3n+1) img {
+      /* 🔹 Caso: sobra 1 (ocupa todo el ancho con proporción real) */
+      .gallery > *:last-child:nth-child(3n+1) {
+        grid-column: 1 / -1;
+      }
+      .gallery > *:last-child:nth-child(3n+1) img {
         aspect-ratio: auto;
         height: auto;
       }
-      
-      /* 🔹 Si quedan 2 al final → cada una ocupa la mitad con su proporción */
+
+      /* 🔹 Caso: sobran 2 (ocupan mitad y mitad con proporción real) */
       .gallery > *:nth-last-child(2):nth-child(3n+1),
-      .gallery > *:nth-last-child(1):nth-child(3n+2) {
+      .gallery > *:last-child:nth-child(3n+2) {
         grid-column: span 2;
       }
-      
       .gallery > *:nth-last-child(2):nth-child(3n+1) img,
-      .gallery > *:nth-last-child(1):nth-child(3n+2) img {
+      .gallery > *:last-child:nth-child(3n+2) img {
         aspect-ratio: auto;
         height: auto;
       }
-      
+
       /* 🔹 En móvil → todas en columna, manteniendo proporción natural */
       @media (max-width: 768px) {
         .gallery {
