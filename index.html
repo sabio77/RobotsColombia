@@ -585,6 +585,9 @@
         </div>-->
           
         <form action="https://formsubmit.co/disenoy3d.c.a@gmail.com" method="POST" class="contact-form" onsubmit="alert('✅ Gracias — pronto te contactaremos');">
+          <!-- 👇 Aquí defines el asunto fijo -->
+          <input type="hidden" name="_subject" id="subjectField" value="COTIZACION | RobotsColombia.com">
+          
           <div class="field">
             <label>Nombre / Empresa</label>
             <input type="text" name="nombre" required>
@@ -601,9 +604,6 @@
             <label for="cmessage">Mensaje / ¿Qué robot te interesa?</label>
             <textarea id="cmessage" name="mensaje" placeholder="Cuéntanos tu necesidad, tamaño de lámina, material, etc." required></textarea>
           </div>
-
-          <!-- 👇 Aquí defines el asunto fijo -->
-          <input type="hidden" name="_subject" value="COTIZACION | RobotsColombia.com">
           
           <!-- Opcional: evita SPAM -->
           <input type="hidden" name="_captcha" value="false">
