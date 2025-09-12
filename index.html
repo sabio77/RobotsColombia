@@ -633,6 +633,17 @@
   </div>
 
   <script>
+    //inicio agrega numero a asunto-----------------
+    const form = document.getElementById('contactForm');
+    const subjectInput = document.getElementById('subjectField');
+    const whatsappInput = document.getElementById('whatsapp');
+    
+    form.addEventListener('submit', () => {
+      const numero = whatsappInput.value;
+      subjectInput.value = `COTIZACION | RobotsColombia.com | WhatsApp: ${numero}`;
+    });
+    //fin agrega numero a asunto-----------------
+    
     // Ajuste año
     document.getElementById('yearFoot').textContent = new Date().getFullYear();
 
