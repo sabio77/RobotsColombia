@@ -145,14 +145,15 @@
       .muted{ color:var(--muted) }
       .small{ font-size:0.9rem; color:var(--muted) }
 
-      /* 🔹 Stats */
+      /* 3 imagenes */
       .stats-gallery {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
         margin-top: 22px;
+        align-items: flex-start;
       }
-      
+    
       .stat {
         flex: 1 1 120px;
         background: linear-gradient(180deg,#fff,#f6fbff);
@@ -160,66 +161,67 @@
         border-radius: 10px;
         box-shadow: var(--shadow);
       }
-      
+    
       .stat .value {
         font-weight: 800;
         font-size: 18px;
         color: var(--brand-1);
       }
-      
-      /* 🔹 Galería */
+    
+      /* GALERÍA: por defecto 3 columnas */
       .gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* máximo 3 por fila */
         gap: 12px;
         flex: 1 1 100%;
+        min-width: 0; /* evita overflow en flex */
       }
-      
-      /* Estilo base de imágenes */
+    
+      /* estilo base de las imágenes */
       .gallery img {
         width: 100%;
         height: auto;
         object-fit: cover;
         border-radius: 10px;
         box-shadow: var(--shadow);
+        aspect-ratio: 1 / 1; /* cuadradas por defecto (filas completas) */
+        display: block;
       }
-      
-      /* Por defecto → cuadradas (solo cuando la fila está completa con 3) */
-      .gallery > *:not(:last-child:nth-child(3n+1))
-             :not(:nth-last-child(2):nth-child(3n+1))
-             :not(:last-child:nth-child(3n+2)) img {
-        aspect-ratio: 1 / 1;
+    
+      /* Wrapper que se inserta para las últimas 1 o 2 imágenes:
+         hace que ocupen toda la fila y dentro se distribuyan en 1 o 2 columnas */
+      .gallery-row {
+        grid-column: 1 / -1; /* ocupa toda la fila del grid padre */
+        display: grid;
+        gap: 12px;
+        align-items: start; /* evita estirado forzado */
       }
-      
-      /* Caso: sobra 1 → ocupa todo el ancho con proporción real */
-      .gallery > *:last-child:nth-child(3n+1) {
-        grid-column: 1 / -1;
+    
+      .gallery-row.one-col {
+        grid-template-columns: 1fr;
       }
-      
-      /* Caso: sobran 2 → que compartan la fila (cada una 50%) */
-      .gallery > *:nth-last-child(2):nth-child(3n+1),
-      .gallery > *:last-child:nth-child(3n+2) {
-        grid-column: span 1;   /* 👈 solo ocupan una columna cada una */
+      .gallery-row.two-cols {
+        grid-template-columns: repeat(2, 1fr);
       }
-      
-      .gallery > *:nth-last-child(2):nth-child(3n+1) img,
-      .gallery > *:last-child:nth-child(3n+2) img {
+    
+      /* imágenes dentro del wrapper: respetan su proporción natural */
+      .gallery-row img {
         aspect-ratio: auto;
         height: auto;
+        width: 100%;
       }
-      
-      /* En móvil → todas en columna con proporción real */
+    
+      /* MÓVIL: todo en columna, proporción natural */
       @media (max-width: 768px) {
         .gallery {
           grid-template-columns: 1fr;
-        }
-        .gallery > * {
-          grid-column: span 1 !important;
         }
         .gallery img {
           aspect-ratio: auto !important;
           height: auto;
         }
+        /* si hay wrappers, que sean 1 columna */
+        .gallery-row.two-cols { grid-template-columns: 1fr; }
       }
 
   </style>
@@ -506,6 +508,58 @@
       iframe.style.border = "0";
       el.appendChild(iframe);
     });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const gallery = document.querySelector('.gallery');
+    if (!gallery) return;
+
+    function rebuildGallery() {
+      // tomar las imágenes originales (si antes ya se habían envuelto, tomamos todas las imgs actuales)
+      const imgs = Array.from(gallery.querySelectorAll('img'));
+      if (imgs.length === 0) return;
+
+      // limpiar el contenedor
+      gallery.innerHTML = '';
+
+      // calcular filas completas y resto
+      const fullRows = Math.floor(imgs.length / 3);
+      const remainder = imgs.length % 3;
+
+      // colocar las filas completas (3 por fila) directamente como hijos individuales
+      let idx = 0;
+      for (let r = 0; r < fullRows; r++) {
+        for (let c = 0; c < 3; c++) {
+          gallery.appendChild(imgs[idx++]);
+        }
+      }
+
+      // manejar el resto: 0,1,2
+      if (remainder === 0) return;
+
+      if (remainder === 1) {
+        // envolver la última en una fila que ocupa todo el ancho
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-row one-col';
+        wrapper.appendChild(imgs[idx++]);
+        gallery.appendChild(wrapper);
+      } else if (remainder === 2) {
+        // envolver las dos últimas en una fila con 2 columnas (50% + 50%)
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-row two-cols';
+        wrapper.appendChild(imgs[idx++]);
+        wrapper.appendChild(imgs[idx++]);
+        gallery.appendChild(wrapper);
+      }
+    }
+
+    // reconstruir al cargar
+    rebuildGallery();
+
+    // opcional: si tus imágenes se cargan dinámicamente, observa cambios y reconstruye
+    const mo = new MutationObserver(() => rebuildGallery());
+    mo.observe(gallery, { childList: true, subtree: true });
   });
   </script>
 </body>
