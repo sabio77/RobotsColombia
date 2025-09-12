@@ -584,10 +584,14 @@
           </form>
         </div>
 
-        <form action="https://formsubmit.co/disenoy3d.c.a@gmail.com" method="POST" class="contact-form">
+        <form action="https://formsubmit.co/disenoy3d.c.a@gmail.com" method="POST" class="contact-form" onsubmit="alert('✅ Gracias — pronto te contactaremos');>
           <div class="field">
             <label>Nombre</label>
             <input type="text" name="nombre" required>
+          </div>
+          <div class="field">
+            <label>Teléfono / WhatsApp</label>
+            <input type="cphone" name="WhatsApp" required>
           </div>
           <div class="field">
             <label>Email</label>
@@ -597,9 +601,13 @@
             <label>Mensaje</label>
             <textarea name="mensaje" required></textarea>
           </div>
+
+          <!-- 👇 Aquí defines el asunto fijo -->
+          <input type="hidden" name="_subject" value="COTIZACION | RobotsColombia.com">
+          
           <!-- Opcional: evita SPAM -->
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://robotscolombia.com/gracias.html">
+          <input type="hidden" name="_next" value="https://robotscolombia.com">
           <button type="submit" class="btn-primary">Enviar</button>
         </form>
 
