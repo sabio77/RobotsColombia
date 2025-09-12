@@ -558,58 +558,33 @@
       <div class="contact">
         <div class="contact-form hero-card">
           <p class="small muted">Déjanos tus datos y te contactamos en menos de 24 horas con una propuesta a medida.</p>
-
-          <!--<form onsubmit="event.preventDefault(); alert('Gracias — pronto te contactaremos');" aria-label="Formulario de contacto">
+          
+          <form id="contactForm" action="https://formsubmit.co/disenoy3d.c.a@gmail.com" method="POST" class="contact-form" onsubmit="alert('✅ Gracias — pronto te contactaremos');">
+            <!-- 👇 Aquí defines el asunto fijo -->
+            <input type="hidden" name="_subject" id="subjectField" value="COTIZACION | RobotsColombia.com">
+            
             <div class="field">
-              <label for="cname">Nombre / Empresa</label>
-              <input id="cname" type="text" placeholder="Ej: Taller Metalúrgico S.A." required>
+              <label>Nombre / Empresa</label>
+              <input type="text" name="nombre" required>
             </div>
             <div class="field">
-              <label for="cphone">Teléfono / WhatsApp</label>
-              <input id="cphone" type="text" placeholder="+57 3127528322" required>
+              <label>Teléfono / WhatsApp</label>
+              <input type="text" name="WhatsApp" id="whatsapp" required pattern="^\+?[0-9]+$">
             </div>
             <div class="field">
-              <label for="cemail">Correo</label>
-              <input id="cemail" type="email" placeholder="contacto@empresa.com">
+              <label>Correo</label>
+              <input type="email" name="email" required>
             </div>
             <div class="field">
               <label for="cmessage">Mensaje / ¿Qué robot te interesa?</label>
-              <textarea id="cmessage" placeholder="Cuéntanos tu necesidad, tamaño de lámina, material, etc."></textarea>
+              <textarea id="cmessage" name="mensaje" placeholder="Cuéntanos tu necesidad, tamaño de lámina, material, etc." required></textarea>
             </div>
-
-            <div style="display:flex; gap:10px; align-items:center">
-              <button class="btn-primary" type="submit">Solicitar cotización</button>
-              <a class="btn-outline" href="mailto:ventas@robotscolombia.com">Escríbenos por email</a>
-            </div>
+            
+            <!-- Opcional: evita SPAM -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://robotscolombia.com">
+            <button type="submit" class="btn-primary">Enviar Solicitud</button>
           </form>
-        </div>-->
-          
-        <form action="https://formsubmit.co/disenoy3d.c.a@gmail.com" method="POST" class="contact-form" onsubmit="alert('✅ Gracias — pronto te contactaremos');">
-          <!-- 👇 Aquí defines el asunto fijo -->
-          <input type="hidden" name="_subject" id="subjectField" value="COTIZACION | RobotsColombia.com">
-          
-          <div class="field">
-            <label>Nombre / Empresa</label>
-            <input type="text" name="nombre" required>
-          </div>
-          <div class="field">
-            <label>Teléfono / WhatsApp</label>
-            <input type="text" name="WhatsApp" id="whatsapp" required pattern="^\+?[0-9]+$">
-          </div>
-          <div class="field">
-            <label>Correo</label>
-            <input type="email" name="email" required>
-          </div>
-          <div class="field">
-            <label for="cmessage">Mensaje / ¿Qué robot te interesa?</label>
-            <textarea id="cmessage" name="mensaje" placeholder="Cuéntanos tu necesidad, tamaño de lámina, material, etc." required></textarea>
-          </div>
-          
-          <!-- Opcional: evita SPAM -->
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://robotscolombia.com">
-          <button type="submit" class="btn-primary">Enviar Solicitud</button>
-        </form>
 
         <aside style="padding:20px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfdff); box-shadow:var(--shadow)">
           <h3 style="margin-top:0">Contacto directo</h3>
