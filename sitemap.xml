@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://robotscolombia.com/</loc>
-    <lastmod>2025-09-12</lastmod>
-    <priority>1.0</priority>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <sitemap>
+      <loc>https://robotscolombia.com/page-sitemap.xml</loc>
+      <lastmod>2025-09-12T18:00:00+00:00</lastmod>
+   </sitemap>
+</sitemapindex>
