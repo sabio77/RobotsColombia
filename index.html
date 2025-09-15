@@ -143,6 +143,27 @@
   }
   </script>
 
+  <!-- Google Analytics 4 (gtag.js) - Google tag-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-176T2X93N3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+  
+    // Opcional: establece un consent default si usas Consent Mode (ver explicación más abajo)
+    // gtag('consent', 'default', { 'ad_storage': 'denied', 'analytics_storage': 'denied' });
+  
+    gtag('js', new Date());
+  
+    // Configuración recomendada:
+    gtag('config', 'G-176T2X93N3', {
+      anonymize_ip: true,               // anonimiza IPs (mejora privacidad)
+      cookie_flags: 'SameSite=None;Secure', // cookies seguras si usas HTTPS
+      transport_type: 'beacon'          // mejor entrega en navegadores modernos
+      // send_page_view: false          // descomenta si tu app es SPA y quieres controlar page_view manualmente
+    });
+  </script>
+
+
     <style>
       :root{
         --bg:#fbfdff;
