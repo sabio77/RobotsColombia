@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robótica industrial • Guía avanzada y casos reales | RobotsColombia</title>
+  <meta name="description" content="Guía avanzada de robótica industrial: definición, tecnologías, diseño de celdas, ROI, integración con CAM/MES, aplicaciones por sectores (automotriz, metalmecánica, alimentos, farmacéutica, construcción), casos prácticos en Colombia, mantenimiento y normativa.">
+  <meta name="keywords" content="robótica industrial, robots industriales, automatización, robotica colombia, integración robótica, ROI robots, mantenimiento robots, casos robótica Colombia">
+  <link rel="canonical" href="https://robotscolombia.com/blog/robotica-industrial" />
+  <link rel="icon" href="https://robotscolombia.onrender.com/img/robots-colombia.webp" type="image/webp" />
+  <meta name="author" content="RobotsColombia">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Robótica industrial • Guía avanzada y casos reales | RobotsColombia" />
+  <meta property="og:description" content="Todo sobre robótica industrial: tecnologías, selección, ROI, integración y ejemplos reales en Colombia. Guía técnica y práctica para empresas." />
+  <meta property="og:image" content="https://robotscolombia.onrender.com/img/robots-colombia.webp" />
+  <meta property="og:url" content="https://robotscolombia.com/blog/robotica-industrial" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- JSON-LD: Article + FAQ + Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://robotscolombia.com/blog/robotica-industrial",
+        "headline": "Robótica industrial • Guía avanzada y casos reales",
+        "description": "Guía avanzada de robótica industrial: tecnologías, diseño de celdas, ROI, integración, aplicaciones por sector y casos prácticos en Colombia.",
+        "image": "https://robotscolombia.onrender.com/img/robots-colombia.webp",
+        "author": { "@type": "Organization", "name": "RobotsColombia" },
+        "publisher": { "@type": "Organization", "name": "RobotsColombia", "logo": { "@type":"ImageObject","url":"https://robotscolombia.onrender.com/img/robots-colombia.webp" } },
+        "datePublished": "2025-09-16",
+        "mainEntityOfPage": "https://robotscolombia.com/blog/robotica-industrial"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type":"Question",
+            "name":"¿Qué es la robótica industrial y por qué invertir?",
+            "acceptedAnswer":{"@type":"Answer","text":"La robótica industrial automatiza procesos repetitivos o peligrosos, mejora la calidad y la velocidad de producción, reduce costos operativos y permite escalar producción con mayor trazabilidad y menor variabilidad."}
+          },
+          {
+            "@type":"Question",
+            "name":"¿Cómo calcular el ROI de un robot?",
+            "acceptedAnswer":{"@type":"Answer","text":"Se evalúan ahorros en mano de obra, disminución de scrap y retrabajo, aumento de producción y costos totales (inversión, integración, mantenimiento). Se suele calcular Payback simple y NPV para decisiones de inversión."}
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Inicio","item":"https://robotscolombia.com"},
+          {"@type":"ListItem","position":2,"name":"Blog","item":"https://robotscolombia.com/blog"},
+          {"@type":"ListItem","position":3,"name":"Robótica industrial","item":"https://robotscolombia.com/blog/robotica-industrial"}
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --maxw:1200px;
+      --brand:#0b74d1;
+      --muted:#6b7280;
+      --bg:#f5f8fb;
+      --card:#ffffff;
+      --radius:14px;
+      --shadow: 0 14px 40px rgba(2,6,23,.06);
+      --accent: linear-gradient(90deg,#0b74d1,#00a4ff);
+      --content-gap:22px;
+      --text:#0b1b2b;
+      --accent-color:#0b74d1;
+    }
+    html,body{height:100%;margin:0;font-family:Inter, Roboto, "Segoe UI", Arial, sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--maxw);margin:28px auto;padding:28px;background:var(--card);border-radius:12px;box-shadow:var(--shadow)}
+    header.page-head{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+    header.page-head img{width:70px;height:70px;border-radius:10px;object-fit:cover}
+    h1{margin:0;font-size:1.9rem;line-height:1.06}
+    .subtitle{color:var(--muted);margin-top:6px}
+    nav.toc{background:#f1f6fb;padding:12px;border-radius:10px;margin:18px 0;border:1px solid rgba(11,116,209,.06)}
+    nav.toc ul{margin:8px 0 0;padding-left:18px}
+    nav.toc a{color:var(--accent-color);text-decoration:none}
+    .layout{display:grid;grid-template-columns:1fr 340px;gap:26px}
+    main{min-width:0}
+    article{line-height:1.65}
+    section{margin-bottom:28px}
+    h2{font-size:1.35rem;color:#06283d;margin:0 0 8px}
+    h3{font-size:1.05rem;color:#08304a;margin:8px 0}
+    p{margin:10px 0;color:#24344a}
+    ul,ol{margin:8px 0 8px 20px;color:#24344a}
+    .lead-box{background:linear-gradient(180deg,#f8fbff,#ffffff);padding:14px;border-radius:10px;border:1px solid rgba(2,6,23,.04);margin-bottom:14px}
+    .sidebar{position:sticky;top:28px;background:#fbfdff;padding:14px;border-radius:10px;border:1px solid rgba(2,6,23,.04)}
+    .card{background:#fff;padding:12px;border-radius:8px;border:1px solid rgba(2,6,23,.04);box-shadow:0 6px 18px rgba(2,6,23,.03);margin-bottom:12px}
+    .cta{display:inline-block;padding:10px 14px;background:var(--accent-color);color:#fff;border-radius:10px;text-decoration:none;font-weight:700}
+    table{width:100%;border-collapse:collapse;margin:12px 0}
+    th,td{border:1px solid rgba(2,6,23,.06);padding:8px;text-align:left;font-size:0.95rem}
+    .hero-img{width:100%;height:340px;object-fit:cover;border-radius:10px;margin:14px 0}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .code{background:#0b1220;color:#fff;padding:10px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    footer.page-foot{margin-top:20px;color:var(--muted);font-size:0.95rem}
+    @media (max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:static;margin-top:18px}}
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header class="page-head">
+      <img src="https://robotscolombia.onrender.com/img/robots-colombia.webp" alt="RobotsColombia logo">
+      <div>
+        <h1>Robótica industrial — Guía avanzada para empresas (tecnologías, ROI, integración y casos Colombia)</h1>
+        <div class="subtitle">Todo lo que necesita saber para diseñar, validar e implementar automatización robótica en su planta: técnicas, métricas, normativa y ejemplos prácticos.</div>
+      </div>
+    </header>
+
+    <figure class="lead-box" aria-hidden="true">
+      <img class="hero-img" src="https://robotscolombia.onrender.com/img/robots-colombia.webp" alt="Robótica industrial robots" />
+      <p style="margin:8px 0;color:var(--muted)"><strong>Resumen:</strong> Esta guía cubre definición, tipos de robots, selección por aplicación, diseño de celdas, cálculo del ROI, integración con CAM/MES, mantenimiento predictivo y normativa de seguridad. Incluye ejemplos y checklist para proyectos en Colombia.</p>
+    </figure>
+
+    <nav class="toc" aria-label="Índice de la página">
+      <strong>Índice rápido</strong>
+      <ul>
+        <li><a href="#que-es">¿Qué es la robótica industrial?</a></li>
+        <li><a href="#tipos">Tipos de robots y herramientas</a></li>
+        <li><a href="#diseno">Diseño de células y fixturing</a></li>
+        <li><a href="#integracion">Integración software: CAD/CAM/MES</a></li>
+        <li><a href="#roi">Cómo calcular ROI</a></li>
+        <li><a href="#mantenimiento">Mantenimiento y KPIs</a></li>
+        <li><a href="#seguridad">Seguridad y normativa</a></li>
+        <li><a href="#casos">Casos reales en Colombia</a></li>
+        <li><a href="#checklist">Checklist de implementación</a></li>
+        <li><a href="#faq">FAQ técnico</a></li>
+      </ul>
+    </nav>
+
+    <div class="layout">
+      <main>
+        <article>
+
+          <!-- 1 -->
+          <section id="que-es">
+            <h2>¿Qué es la robótica industrial?</h2>
+            <p>La robótica industrial comprende manipuladores mecánicos programables, integrados con controladores, sensores y software para ejecutar tareas repetitivas, peligrosas o de alta precisión. La automatización robótica permite mejorar la calidad, aumentar la productividad, y reducir riesgos laborales y desperdicios.</p>
+
+            <h3>Beneficios clave</h3>
+            <ul>
+              <li><strong>Repetibilidad y precisión:</strong> reducción de variabilidad en procesos críticos.</li>
+              <li><strong>Productividad:</strong> aumento de ciclos por hora y operación continua.</li>
+              <li><strong>Seguridad:</strong> desvío de operarios de tareas peligrosas.</li>
+              <li><strong>Trazabilidad:</strong> integración con MES para seguimiento pieza a pieza.</li>
+            </ul>
+          </section>
+
+          <!-- 2 -->
+          <section id="tipos">
+            <h2>Tipos de robots y herramientas (end-effectors)</h2>
+            <p>Elegir la configuración adecuada es la base del éxito del proyecto.</p>
+
+            <div class="two-col">
+              <div>
+                <h3>Configuraciones mecánicas</h3>
+                <ul>
+                  <li><strong>6 ejes articulados:</strong> máxima flexibilidad para trabajos 3D (soldadura, corte, manipulación compleja).</li>
+                  <li><strong>Gantry / portal:</strong> excelente repetibilidad en 2D y para planchas grandes (corte, grabado).</li>
+                  <li><strong>SCARA:</strong> velocidad en plano, ideal para pick & place en electrónica.</li>
+                  <li><strong>Cobots (robots colaborativos):</strong> segura interacción humano-robot para tareas ligeras y ensamblaje.</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Herramientas (end-effectors)</h3>
+                <ul>
+                  <li>Pinzas eléctricas o neumáticas (pick & place).</li>
+                  <li>Cabezal de soldadura por arco (MIG/MAG/TIG).</li>
+                  <li>Cabezal de corte láser/fibra o CO₂.</li>
+                  <li>Herramientas de pintura, dispensado, atornillado robotizado.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3 -->
+          <section id="diseno">
+            <h2>Diseño de células: fixturing, seguridad y layout</h2>
+            <p>Un buen diseño de célula considera seguridad, ergonomía, extracción, accesos para mantenimiento y fixturing que garantice tolerancias.</p>
+
+            <h3>Fixturing y sujeción</h3>
+            <p>La fijación correcta evita deformaciones y deriva en precisión. Para láminas finas y microperforado se usan tensores y mesas perforadas con vacío.</p>
+
+            <h3>Gestión térmica y extracción</h3>
+            <p>Procesos como corte láser generan humos y calor; es obligatorio un sistema de extracción y filtrado que proteja ópticas y ambiente.</p>
+
+            <h3>Simulación y verificación</h3>
+            <p>Simula offline (FAT) trayectorias y colisiones; valida tiempos ciclo y accesos antes de la inversión en planta.</p>
+          </section>
+
+          <!-- 4 -->
+          <section id="integracion">
+            <h2>Integración software: del CAD/CAM al MES</h2>
+            <p>El flujo típico es: diseño CAD → CAM (toolpath) → robot controller (offline/online) → MES/SCADA para trazabilidad. La integración permite ajustes en tiempo real y mantenimiento predictivo.</p>
+
+            <h3>Protocolos y datos</h3>
+            <ul>
+              <li>OPC-UA para integración industrial.</li>
+              <li>APIs para intercambio de órdenes con ERP y MES.</li>
+              <li>Logs por pieza para trazabilidad y mejora continua.</li>
+            </ul>
+          </section>
+
+          <!-- 5 -->
+          <section id="roi">
+            <h2>Cómo calcular el ROI y métricas habituales</h2>
+            <p>Metodología rápida:</p>
+            <ol>
+              <li>Estimar ahorro anual en mano de obra directa (horas×tarifa×días).</li>
+              <li>Calcular reducción de scrap y retrabajo en valor monetario.</li>
+              <li>Incluir costos recurrentes: energía, mantenimiento, consumibles.</li>
+              <li>Comparar con inversión total (robot + integración + infraestructura).</li>
+            </ol>
+
+            <h3>KPIs útiles</h3>
+            <ul>
+              <li>OEE (Overall Equipment Effectiveness)</li>
+              <li>Disponibilidad (%)</li>
+              <li>MTBF / MTTR</li>
+              <li>Coste por pieza</li>
+            </ul>
+
+            <p>Consejo: realice un POC (prueba de concepto) con datos reales de la línea para proyectar resultados con mayor precisión.</p>
+          </section>
+
+          <!-- 6 -->
+          <section id="mantenimiento">
+            <h2>Mantenimiento y vida útil</h2>
+            <p>Combinar mantenimiento preventivo con predictivo (sensórica + análisis) optimiza disponibilidad y reduce costos a largo plazo.</p>
+
+            <h3>Plan típico</h3>
+            <ul>
+              <li>Revisión visual diaria y checklist de seguridad.</li>
+              <li>Limpieza óptica y cambio programado de boquillas (si aplica).</li>
+              <li>Revisión y calibración mensual / trimestral según horas de operación.</li>
+              <li>Contratos SLA con proveedor para repuestos críticos.</li>
+            </ul>
+          </section>
+
+          <!-- 7 -->
+          <section id="seguridad">
+            <h2>Seguridad, normativa y certificaciones</h2>
+            <p>Las normas ISO 10218 (robots industriales) e ISO/TS aplicables marcan requisitos mínimos. Para láseres, siga la normativa de seguridad láser (clasificación por clase) y use enclavamientos, cortinas y E-stop.</p>
+
+            <h3>Formación</h3>
+            <p>Capacite a operarios y mantenimiento en procedimientos operativos estándar y simulacros de emergencia.</p>
+          </section>
+
+          <!-- 8 -->
+          <section id="casos">
+            <h2>Casos reales y aplicaciones en Colombia</h2>
+            <p>Resumen de ejemplos reales que demuestran el impacto:</p>
+
+            <h3>Planta metalmecánica — Medellín</h3>
+            <p>Implementación de robot 6 ejes para soldadura por arco: reducción del 35% en tiempos de ciclo y mejora de 28% en calidad medible (reducción de retrabajo).</p>
+
+            <h3>Línea de empaquetado — Cundinamarca</h3>
+            <p>Integración de cobots para pick & place y paletizado: incremento de throughput en 40% y mejor ergonomía para operarios.</p>
+
+            <h3>Prefabricados en construcción — Valle</h3>
+            <p>Gantry con corte y fresado CNC para paneles: reducción de desperdicio por nesting y menor tiempo de acabado manual.</p>
+          </section>
+
+          <!-- 9 -->
+          <section id="checklist">
+            <h2>Checklist para lanzar un proyecto robótico (rápido)</h2>
+            <ul>
+              <li>Definir objetivo y KPI (producción, calidad, coste por pieza).</li>
+              <li>Recolectar datos actuales (tiempos, rendimientos, scrap).</li>
+              <li>Evaluar proveedores y solicitar POC.</li>
+              <li>Planear layout y seguridad (FAT/SAT).</li>
+              <li>Estimar total cost of ownership (TCO) + plan de repuestos.</li>
+            </ul>
+          </section>
+
+          <!-- 10 -->
+          <section id="faq">
+            <h2>FAQ técnico ampliado</h2>
+            <dl>
+              <dt>¿Qué robot elegir para soldadura de estructuras medianas?</dt>
+              <dd>Robot 6 ejes con payload 20–50 kg, con celda de seguridad, mesa rotatoria (positioner) y software de sincronización de trayectoria.</dd>
+
+              <dt>¿Se puede automatizar una línea sin detener producción?</dt>
+              <dd>Sí, con plan de integración faseada, pruebas offline y POC en paralelo a producción se minimiza downtime.</dd>
+
+              <dt>¿Qué coste tiene integración típica?</dt>
+              <dd>Depende de alcance: integración simple (robot + end effector) puede ser 20–40% del coste del robot; celdas completas con fixtures y PLC suben más. Solicitar cotización técnica es clave.</dd>
+            </dl>
+          </section>
+
+          <footer>
+            <p style="margin-top:14px">¿Quieres que analicemos tu caso? <a class="cta" href="https://robotscolombia.com/contacto">Solicita una consultoría</a> — pruebas piloto y presupuestos adaptados.</p>
+          </footer>
+        </article>
+      </main>
+
+      <aside class="sidebar" aria-label="Recursos y contacto">
+        <div class="card">
+          <strong>Contacto rápido</strong>
+          <p>soporte técnico: <a href="mailto:soporte@robotscolombia.com">soporte@robotscolombia.com</a></p>
+          <p><a class="cta" href="https://robotscolombia.com/contacto">Solicitar demo</a></p>
+        </div>
+
+        <div class="card">
+          <strong>Recursos</strong>
+          <ul>
+            <li><a href="/blog/case-study-robotica">Caso: automatización en metalmecánica</a></li>
+            <li><a href="/servicios">Servicios de integración</a></li>
+            <li><a href="/guia/robot-corte-laser">Guía de robots de corte láser</a></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <strong>Resumen técnico</strong>
+          <table aria-hidden="true">
+            <thead><tr><th>Aplicación</th><th>Robot sugerido</th></tr></thead>
+            <tbody>
+              <tr><td>Pick & place ligero</td><td>Cobot 5–10 kg</td></tr>
+              <tr><td>Soldadura de conjuntos</td><td>6 ejes, 20–50 kg</td></tr>
+              <tr><td>Corte láser/3D</td><td>6 ejes + láser fibra 1–4 kW</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <strong>Checklist rápido</strong>
+          <ul>
+            <li>Definir objetivo</li>
+            <li>Medir tiempos actuales</li>
+            <li>Solicitar POC</li>
+            <li>Evaluar TCO y SLA</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="page-foot">
+      <small>RobotsColombia © <span id="yr"></span> — Blog técnico sobre robótica industrial y automatización</small>
+    </footer>
+  </div>
+
+  <script>
+    // UI helpers mínimos
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    // Smooth anchor fallback for old browsers
+    (function() {
+      if('scrollBehavior' in document.documentElement.style) return;
+      document.querySelectorAll('a[href^="#"]').forEach(function(a){
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          var id = this.getAttribute('href').substring(1);
+          var el = document.getElementById(id);
+          if(el) el.scrollIntoView(true);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
