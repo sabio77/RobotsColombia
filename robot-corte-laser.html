@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robot industrial y robot de corte láser — guía técnica completa, aplicaciones (fachadas microperforadas, microperforado en láminas, corte 3D)</title>
+  <meta name="description" content="Guía técnica y comercial exhaustiva sobre robot industrial y robot de corte láser: definiciones, tecnologías, parámetros, aplicaciones en fachadas microperforadas, microperforado en láminas y corte 3D sobre superficies curvas. Casos de estudio, checklist, FAQs y recomendaciones prácticas.">
+  <meta name="keywords" content="robot industrial, robot de corte láser, microperforado, fachadas microperforadas, corte 3D, láser fibra, láser CO2, parámetros corte láser, mantenimiento robots, seguridad láser">
+  <link rel="canonical" href="https://mapsx.app/guia/robot-corte-laser-completa" />
+  <meta name="author" content="MapsX">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Robot industrial y robot de corte láser — guía técnica completa">
+  <meta property="og:description" content="Todo sobre robots de corte láser: definiciones, tecnologías, proceso de microperforado en fachadas, microperforado en láminas y corte 3D sobre superficies curvas.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mapsx.app/guia/robot-corte-laser-completa">
+  <meta property="og:image" content="https://mapsx.app/all/img/robot-corte-laser-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@MapsXapp">
+
+  <!-- JSON-LD: Article + FAQ + Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://mapsx.app/guia/robot-corte-laser-completa",
+        "headline": "Robot industrial y robot de corte láser — guía técnica completa",
+        "datePublished": "2025-09-16",
+        "dateModified": "2025-09-16",
+        "author": { "@type": "Organization", "name": "MapsX" },
+        "publisher": { "@type": "Organization", "name": "MapsX", "logo": { "@type":"ImageObject", "url":"https://mapsx.app/all/img/miniLOGO.png" } },
+        "image": "https://mapsx.app/all/img/robot-corte-laser-cover.jpg",
+        "description": "Guía extensa sobre robots industriales y robots de corte láser con aplicaciones en fachadas microperforadas, microperforado de láminas y corte 3D sobre superficies curvas. Incluye parámetros técnicos, casos prácticos y FAQ."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué es un robot industrial y para qué sirve en corte láser?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Un robot industrial es un manipulador programable que, en corte láser, mueve el cabezal láser con precisión para cortar o perforar materiales siguiendo trayectorias CAD/CAM, permitiendo trabajos 2D y 3D con alta repetibilidad." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué ventajas aporta un robot frente a una cortadora gantry?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Mayor libertad de movimiento (6 ejes), capacidad para cortes 3D y superficies curvas, y flexibilidad para integrar sensores y cámaras; la gantry es más económica y óptima para planchas grandes en 2D." }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mapsx.app" },
+          { "@type": "ListItem", "position": 2, "name": "Guías", "item": "https://mapsx.app/guia" },
+          { "@type": "ListItem", "position": 3, "name": "Robot de corte láser", "item": "https://mapsx.app/guia/robot-corte-laser-completa" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --max-w:1200px;
+      --brand:#0ea5e9;
+      --muted:#6b7280;
+      --bg:#fbfdff;
+      --card:#fff;
+      --content-gap:22px;
+      --radius:12px;
+      --text:#0f172a;
+      --accent:#0078d7;
+    }
+    html,body{margin:0;padding:0;background:#f4f7fb;font-family:Inter, Roboto, "Segoe UI", Arial, sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--max-w);margin:28px auto;padding:28px;background:var(--card);border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,.06)}
+    header{display:flex;gap:18px;align-items:center;margin-bottom:18px}
+    header img.logo{width:64px;height:64px;border-radius:10px;object-fit:cover}
+    h1{margin:0;font-size:1.8rem;line-height:1.05}
+    .lead{color:var(--muted);margin-top:6px;font-size:1rem}
+    nav.toc{background:#f1f5f9;padding:12px;border-radius:8px;margin:18px 0}
+    nav.toc a{color:var(--brand);text-decoration:none}
+    .layout{display:grid;grid-template-columns:1fr 340px;gap:26px}
+    main article{padding:0}
+    section{margin-bottom:26px}
+    h2{font-size:1.3rem;margin:12px 0}
+    h3{font-size:1.05rem;margin:8px 0;color:#06283d}
+    p{margin:8px 0;color:#243044}
+    ul,ol{color:#243044;margin:8px 0 8px 20px}
+    .sidebar{background:#fbfdff;padding:14px;border-radius:8px;border:1px solid rgba(2,6,23,.04);position:sticky;top:28px}
+    .box{margin-bottom:12px}
+    .box strong{display:block;margin-bottom:8px}
+    table{width:100%;border-collapse:collapse;margin:12px 0}
+    th,td{border:1px solid rgba(2,6,23,.06);padding:8px;text-align:left;font-size:0.95rem}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b1220;color:#fff;padding:10px;border-radius:6px;overflow:auto;font-size:0.9rem}
+    footer{border-top:1px solid rgba(2,6,23,.04);padding-top:14px;color:var(--muted);margin-top:22px;font-size:0.95rem}
+    img.resp{max-width:100%;height:auto;border-radius:8px}
+    .cta{display:inline-block;padding:10px 14px;background:linear-gradient(90deg,var(--accent),#00c6ff);color:#fff;border-radius:10px;text-decoration:none;font-weight:700}
+    @media (max-width:980px){ .layout{grid-template-columns:1fr} .sidebar{position:static;margin-top:18px} }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <img class="logo" src="https://mapsx.app/all/img/robot-corte-laser-cover.jpg" alt="Robot de corte láser">
+      <div>
+        <h1>Robot industrial y robot de corte láser — guía técnica ampliada para arquitectos, fabricantes y estudios</h1>
+        <div class="lead">Este artículo explica en profundidad tecnologías, parámetros y casos prácticos (fachadas microperforadas, microperforado en láminas y corte 3D en superficies curvas). Incluye tablas técnicas, checklist y FAQs para implantar un proceso industrial robusto.</div>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Índice">
+      <strong>Índice — navegación rápida</strong>
+      <ul>
+        <li><a href="#definiciones">Definiciones y conceptos</a></li>
+        <li><a href="#tecnologias">Tecnologías láser y robots</a></li>
+        <li><a href="#parametros">Parámetros de corte (tabla por material)</a></li>
+        <li><a href="#fachadas">Fachadas microperforadas: diseño y producción</a></li>
+        <li><a href="#laminas">Microperforado en láminas — mejores prácticas</a></li>
+        <li><a href="#corte3d">Corte 3D sobre superficies irregulares</a></li>
+        <li><a href="#casos">Casos de estudio detallados</a></li>
+        <li><a href="#calidad-mantenimiento">Control de calidad y mantenimiento</a></li>
+        <li><a href="#seguridad">Seguridad y normativa</a></li>
+        <li><a href="#checklist">Checklist para comprar/usar</a></li>
+        <li><a href="#faq">FAQ técnica</a></li>
+      </ul>
+    </nav>
+
+    <div class="layout">
+      <main>
+        <article>
+
+          <!-- DEFINICIONES -->
+          <section id="definiciones">
+            <h2>Definiciones y conceptos fundamentales</h2>
+            <p><strong>Robot industrial:</strong> manipulador mecánico programable, típicamente con 6 ejes, que ejecuta trayectorias predefinidas con controlador (robot controller). En procesos de corte, el robot mueve el cabezal y gestiona velocidad, orientación y parámetros de proceso.</p>
+
+            <p><strong>Robot de corte láser:</strong> integración entre un robot industrial (manipulador) y un cabezal láser que emite un haz coherente para cortar, perforar o marcar materiales. Los sistemas combinan: fuente láser, fibra/óptica/guías, cabezal con autofocus, boquilla y suministro de gas.</p>
+
+            <p><strong>Cabezal y subsistemas clave:</strong> óptica (lentes), boquilla, sistema de gas (N₂/O₂/Ar), sensores (auto-focus, encoders), cámara de visión y sistema de escape/extracción de humos.</p>
+          </section>
+
+          <!-- TECNOLOGÍAS -->
+          <section id="tecnologias">
+            <h2>Tecnologías de láser y configuraciones de robots</h2>
+
+            <h3>Fuentes láser más comunes</h3>
+            <ul>
+              <li><strong>Láser de fibra:</strong> eficiente, compacto, excelente para metales; buena calidad de corte y menor mantenimiento.</li>
+              <li><strong>Láser CO₂:</strong> ideal para no metales (madera, acrílico, textiles) y para ciertos metales con potencias muy altas.</li>
+              <li><strong>Láser pulsado / ultrafast:</strong> para microperforados y trabajos que requieren mínima zona afectada por calor (HAZ).</li>
+            </ul>
+
+            <h3>Configuraciones mecánicas</h3>
+            <ul>
+              <li><strong>6 ejes articulados:</strong> máxima flexibilidad angular para corte 3D.</li>
+              <li><strong>Gantry / portal:</strong> estabilidad y repetibilidad en 2D para planchas grandes.</li>
+              <li><strong>Robots colaborativos (cobots):</strong> útiles en procesos semiautomáticos y tareas ligeras, atención a seguridad con láser.</li>
+            </ul>
+
+            <h3>Integración software</h3>
+            <p>La integración CAD → CAM → robot controller es clave: generación de trayectorias, compensaciones de herramienta, simulación offline y adaptación en tiempo real con visión/escaneo.</p>
+          </section>
+
+          <!-- PARAMETROS -->
+          <section id="parametros">
+            <h2>Parámetros de proceso: potencia, velocidad, gas y foco (tabla orientativa)</h2>
+            <p>Las tablas siguientes son orientativas. Realiza siempre tests (coupons) para ajustar parámetros según máquina, boquilla y condiciones.</p>
+
+            <table>
+              <thead><tr><th>Material</th><th>Espesor</th><th>Fuente láser</th><th>Potencia (aprox.)</th><th>Gas</th><th>Velocidad (mm/s) — estimado</th></tr></thead>
+              <tbody>
+                <tr><td>Acero inoxidable</td><td>0.5–2 mm</td><td>Fibra</td><td>500–1200 W</td><td>N₂</td><td>200–800</td></tr>
+                <tr><td>Acero al carbono</td><td>1–6 mm</td><td>Fibra</td><td>1000–3000 W</td><td>O₂ (reactivo)</td><td>100–600</td></tr>
+                <tr><td>Aluminio</td><td>0.5–6 mm</td><td>Fibra (alta potencia)</td><td>1500–3500 W</td><td>N₂</td><td>100–600</td></tr>
+                <tr><td>Acrílico / PMMA</td><td>1–10 mm</td><td>CO₂</td><td>60–150 W</td><td>—</td><td>30–300</td></tr>
+                <tr><td>Acero fino microperforado</td><td>0.3–1 mm</td><td>Fibra / pulsed</td><td>300–1000 W</td><td>N₂</td><td>40–300 (depende diámetro)</td></tr>
+              </tbody>
+            </table>
+
+            <p><strong>Notas:</strong> valores aproximados; la selección de pulso (CW vs pulsed) y frecuencia afecta la calidad del perímetro, rebaba y HAZ.</p>
+          </section>
+
+          <!-- FACHADAS -->
+          <section id="fachadas">
+            <h2>Fachadas microperforadas — diseño, fabricación y control de calidad</h2>
+            <p>Las fachadas microperforadas combinan estética, control solar y acústica. Los robots láser permiten producir paneles con patrones complejos y densidad variable.</p>
+
+            <h3>Diseño paramétrico</h3>
+            <p>Utiliza parámetros (diámetro, separación, densidad por zona) en software paramétrico (Grasshopper, Rhino, Dynamo) y exporta vectores optimizados para nesting.</p>
+
+            <h3>Fijación y deformación</h3>
+            <p>La tensión de la lámina y su fixturing son críticos: sin control se generan deformaciones que afectan tolerancia y concentricidad del microperforado. Usa soportes y tensores y realiza compensaciones en CAM.</p>
+
+            <h3>Control de calidad</h3>
+            <ul>
+              <li>Inspección por visión con medición de diámetro y circularidad.</li>
+              <li>Control estadístico de proceso (SPC) para detectar drift en parámetros.</li>
+            </ul>
+          </section>
+
+          <!-- LAMINAS -->
+          <section id="laminas">
+            <h2>Microperforado en láminas: retos y soluciones prácticas</h2>
+            <p>Los desafíos son: minimizar rebaba, evitar fusión parcial y asegurar repetibilidad. Técnicas útiles:</p>
+            <ul>
+              <li>Pruebas de boquilla y ajuste de enfoque dinámico.</li>
+              <li>Uso de gases inertes para evitar oxidación (N₂) y mejorar calidad superficial.</li>
+              <li>Secuencia de corte optimizada (cortar primero zonas internas pequeñas para minimizar deformación).</li>
+            </ul>
+          </section>
+
+          <!-- CORTE 3D -->
+          <section id="corte3d">
+            <h2>Corte 3D sobre superficies curvas: escaneo, registro y compensaciones</h2>
+            <p>Proceso general:</p>
+            <ol>
+              <li>Captura de la pieza con escáner 3D o fotogrametría.</li>
+              <li>Registro de nube de puntos con sistema de referencia del robot.</li>
+              <li>Generación de trayectoria CAM con normal dinámico y control de foco.</li>
+              <li>Corte con seguimiento en tiempo real (registro por visión) y compensación de offset.</li>
+            </ol>
+
+            <h3>Ejemplo técnico</h3>
+            <p>Para cortar una superficie curva con radio variable, el sistema ajusta el ángulo del cabezal cada X mm y recalcula distancia foco/parte; usualmente se requiere servo de torno o 7º eje para piezas complejas.</p>
+          </section>
+
+          <!-- CASOS -->
+          <section id="casos">
+            <h2>Casos de estudio (detallados)</h2>
+
+            <h3>1) Fachada de hotel — 120 m² microperforado con densidad variable</h3>
+            <p>Requerimientos: perforaciones desde 0.6 mm a 3 mm, patrón gradual para control solar. Solución: robot 6 ejes + láser fibra 3 kW, nesting optimizado, boquilla especial microperforado, medición por visión en línea.</p>
+            <p>Resultados: tolerancia ±0.12 mm, velocidad de producción 220 m²/día (con turnos y acabado mínimo).</p>
+
+            <h3>2) Producción de paneles de mobiliario — microperforado decorativo</h3>
+            <p>Requerimiento: piezas repetibles tamaño 600x1200 mm con patrón orgánico. Solución: gantry para producción 2D con láser CO₂ para uso en maderas y composites. Resultado: tasa alta y coste por parte optimizado.</p>
+
+            <h3>3) Corte 3D en prototipado automotriz</h3>
+            <p>Requerimiento: cortes en carrocería para integración de sensores. Solución: robot 6 ejes con escáner 3D y control de trayectoria. Resultado: integración topológica y precisión submilimétrica.</p>
+          </section>
+
+          <!-- CALIDAD Y MANTENIMIENTO -->
+          <section id="calidad-mantenimiento">
+            <h2>Control de calidad, documentación y mantenimiento</h2>
+            <h3>Registro de parámetros</h3>
+            <p>Registra por pieza: potencia, velocidad, gas, presión, boquilla, fecha/hora y resultados de visión. Mantén una base de datos para trazabilidad.</p>
+
+            <h3>Mantenimiento preventivo</h3>
+            <ul>
+              <li>Limpieza óptica (lentes, espejos) cada X horas según fabricante.</li>
+              <li>Revisión y reemplazo de boquillas por desgaste programado.</li>
+              <li>Pruebas de alineación y calibración semanales.</li>
+            </ul>
+          </section>
+
+          <!-- SEGURIDAD -->
+          <section id="seguridad">
+            <h2>Seguridad y normativa (recomendaciones)</h2>
+            <p>Implementa: enclavamientos, cabinas con cortinas láser, E-stop accesible, SOP y formación de operarios. Refiérete a normas ISO relevantes y a las guías del fabricante del láser.</p>
+            <p>Precaución: la reflexión especular del láser exige control de superficies y protección ocular específica.</p>
+          </section>
+
+          <!-- CHECKLIST -->
+          <section id="checklist">
+            <h2>Checklist antes de implementar (resumen rápido)</h2>
+            <ul>
+              <li>Definir materiales y espesores objetivo.</li>
+              <li>Seleccionar tipo de láser y potencia (según tabla).</li>
+              <li>Plan de fixturing y control térmico.</li>
+              <li>Integración CAM/robot y simulación offline.</li>
+              <li>Plan de extracción y tratamiento de humos.</li>
+              <li>Política de mantenimiento y repuestos críticos.</li>
+              <li>Plan de seguridad y capacitación del personal.</li>
+            </ul>
+          </section>
+
+          <!-- FAQ -->
+          <section id="faq">
+            <h2>Preguntas frecuentes (FAQ técnico-comercial)</h2>
+            <dl>
+              <dt>¿Qué potencia necesito para cortar aluminio de 3 mm?</dt>
+              <dd>Depende de la calidad del haz y sistema óptico, pero típicamente 1500–3000 W en fibra con gas N₂ y boquilla adecuada.</dd>
+
+              <dt>¿Se pueden microperforar diameters menores a 0.5 mm?</dt>
+              <dd>Sí, con láser pulsed ultrafast o setups de microperforado con boquilla y control de pulso; es crítica la estabilidad y calidad óptica.</dd>
+
+              <dt>¿Cómo minimizar rebabas en microperforado?</dt>
+              <dd>Optimiza velocidad/potencia, usa N₂, ajusta foco y boquilla; en metales delgados considera postprocesado con ultrasonido o desbarbado mecánico.</dd>
+
+              <dt>¿Necesito un sistema de extracción?</dt>
+              <dd>Sí, para proteger ópticas y salud; además facilita la disipación de calor y reduce contaminantes que afectan calidad de corte.</dd>
+            </dl>
+          </section>
+
+          <footer>
+            <p><strong>¿Quieres una consultoría técnica?</strong> Si deseas adaptar este contenido a tu caso (presupuesto, material, volumen), <a class="cta" href="https://mapsx.app/contacto" rel="noopener">contáctanos</a> y hacemos pruebas en sitio.</p>
+          </footer>
+        </article>
+      </main>
+
+      <aside class="sidebar" aria-label="Recursos y datos">
+        <div class="box">
+          <strong>Resumen técnico rápido</strong>
+          <p>Robots 6 ejes + láser fibra para metales; láser CO₂ para no metales; pulsed para microperforado especializado. Integración CAM y visión es imprescindible para control de calidad.</p>
+        </div>
+
+        <div class="box">
+          <strong>Tabla de potencia sugerida (resumen)</strong>
+          <table aria-hidden="true">
+            <thead><tr><th>Material</th><th>Potencia mínima</th></tr></thead>
+            <tbody>
+              <tr><td>Acero inoxidable (0.5–2mm)</td><td>500 W</td></tr>
+              <tr><td>Acero al carbono (1–6mm)</td><td>1000 W</td></tr>
+              <tr><td>Aluminio (0.5–4mm)</td><td>1500 W</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <strong>Recursos útiles</strong>
+          <ul>
+            <li><a href="https://mapsx.app/blog/robotica-industrial">Guía de robótica industrial</a></li>
+            <li><a href="https://mapsx.app/blog/seguridad-laser">Checklist de seguridad láser</a></li>
+            <li><a href="https://mapsx.app/contacto">Solicitar demo técnica</a></li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <strong>Contacto técnico</strong>
+          <p style="margin:6px 0">Soporte y consultoría: <a href="mailto:soporte@mapsx.app">soporte@mapsx.app</a></p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <small>MapsX © <span id="yr"></span> · Guía técnica ampliada — actualizado 16 sep 2025</small>
+    </footer>
+  </div>
+
+  <script>
+    // UI small helpers
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    // Delegated outbound link console (placeholder para analytics)
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a');
+      if(a && a.href && a.target === '_blank'){
+        // placeholder: console.log('outbound-click', a.href);
+      }
+    });
+  </script>
+</body>
+</html>
