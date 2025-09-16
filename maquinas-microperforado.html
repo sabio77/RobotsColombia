@@ -174,7 +174,7 @@
               <li>Prototipado rápido para diseño y arquitectura</li>
             </ul>
 
-            <p class="small-note">Ejemplo real: <em>Diseño y 3D</em> (<a href="https://disenoy3d.com" id="goDiseno" rel="noopener">disenoy3d.com</a>) utiliza estas máquinas para producir láminas microperforadas que luego comercializa en Colombia. Nuestro workflow conjunto permite pasar de <strong>diseño</strong> a <strong>producción</strong> en plazos reducidos.</p>
+            <p class="small-note">Ejemplo real: <em>Diseño y 3D</em> (<a href="https://disenoy3d.com" target="_blank" id="goDiseno" rel="noopener">disenoy3d.com</a>) utiliza estas máquinas para producir láminas microperforadas que luego comercializa en Colombia. Nuestro workflow conjunto permite pasar de <strong>diseño</strong> a <strong>producción</strong> en plazos reducidos.</p>
           </section>
 
           <section class="section">
@@ -189,7 +189,7 @@
 
             <div class="cta-row">
               <a class="btn" href="https://robotscolombia.com/#contacto">Solicitar cotización</a>
-              <a class="btn secondary" href="https://disenoy3d.com/fachadas-lamina-microperforada" id="goDiseno" rel="noopener">Ver proyectos de Diseño y 3D</a>
+              <a class="btn secondary" href="https://disenoy3d.com/fachadas-lamina-microperforada" target="_blank" id="goDiseno" rel="noopener">Ver proyectos de Diseño y 3D</a>
             </div>
           </section>
 
@@ -223,7 +223,7 @@
               <div>
                 <div style="font-weight:700">Diseño y 3D</div>
                 <div style="color:var(--muted)">Fabricante y distribuidor de láminas microperforadas</div>
-                <a href="https://disenoy3d.com" id="goDiseno">Visitar sitio</a>
+                <a href="https://disenoy3d.com" target="_blank" id="goDiseno">Visitar sitio</a>
               </div>
             </div>
           </div>
@@ -255,7 +255,8 @@
 
     //muestra loading al navegar a diseño y 3d mientras carga
     document.getElementById("goDiseno").addEventListener("click", function (e) {
-      e.preventDefault(); // evita que vaya directo
+      e.preventDefault(); // evita ir directo
+      // Abre primero la página de loading en una nueva pestaña
       window.open("https://robotscolombia.com/img/loading.html?redirect=https://disenoy3d.com", "_blank");
     });
   </script>
