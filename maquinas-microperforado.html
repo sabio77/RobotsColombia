@@ -189,7 +189,7 @@
 
             <div class="cta-row">
               <a class="btn" href="https://robotscolombia.com/#contacto">Solicitar cotización</a>
-              <a class="btn secondary" href="https://disenoy3d.com/fachadas-lamina-microperforada" target="_blank" rel="noopener">Ver proyectos de Diseño y 3D</a>
+              <a class="btn secondary" href="https://disenoy3d.com/fachadas-lamina-microperforada" target="_blank" id="goDiseno" rel="noopener">Ver proyectos de Diseño y 3D</a>
             </div>
           </section>
 
@@ -223,7 +223,7 @@
               <div>
                 <div style="font-weight:700">Diseño y 3D</div>
                 <div style="color:var(--muted)">Fabricante y distribuidor de láminas microperforadas</div>
-                <div style="margin-top:6px"><a href="https://disenoy3d.com" target="https://robotscolombia.com/img/loading" rel="noopener">Visitar sitio</a></div>
+                <a href="https://disenoy3d.com" target="_blank" id="goDiseno">Visitar sitio</a>
               </div>
             </div>
           </div>
@@ -251,6 +251,12 @@
     // UI: permitir abrir enlaces externos en nueva ventana cuando aplica (tracking ligero)
     document.querySelectorAll('a[target="_blank"]').forEach(a=>{
       a.addEventListener('click', ()=>{ try{ console.log('outbound-click', a.href); }catch{} });
+    });
+
+    //muestra loading al navegar a diseño y 3d mientras carga
+    document.getElementById("goDiseno").addEventListener("click", function (e) {
+      e.preventDefault(); // evita que vaya directo
+      window.open("https://robotscolombia.com/img/loading.html?redirect=https://disenoy3d.com", "_blank");
     });
   </script>
 </body>
