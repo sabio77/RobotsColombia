@@ -274,6 +274,17 @@
       .compare{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px; align-items:center }
       @media (max-width:880px){ .compare{ grid-template-columns:1fr } }
       .compare .card-compare{ padding:18px; background:var(--card); border-radius:12px; box-shadow:var(--shadow) }
+
+      /* efecto hover imágenes */
+      #demo-section a:hover {
+        transform: scale(1.04);
+        box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+      }
+    
+      /* efecto hover botón */
+      #demo-section a:hover[style*="background:linear-gradient"] {
+        transform: translateY(-3px);
+      }
   
       /* Testimonials */
       .testimonials{ margin-top:26px; display:grid; gap:12px; }
@@ -545,14 +556,32 @@
     </section>
 
     <!-- Demo / gallery / ejemplos -->
-    <section id="demo-section" aria-labelledby="demoTitle">
-      <h2 id="demoTitle">Ejemplos y resultados</h2>
-      <p class="small muted" style="max-width:72ch;">A continuación puedes ver ejemplos. Las fachadas microperforadas son tendencia y el corte robotizado abre posibilidades estéticas y funcionales.</p>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:14px">
-        <div style="border-radius:12px; overflow:hidden; box-shadow:var(--shadow)"><img src="https://robotscolombia.com/fachadas/lamina-microperforada-laser.jpg" alt="ejemplo1" style="display:block; width:100%; height:220px; object-fit:cover"></div>
-        <div style="border-radius:12px; overflow:hidden; box-shadow:var(--shadow)"><img src="https://robotscolombia.com/fachadas/lamina-microperforada-personalizada2.jpg" alt="ejemplo2" style="display:block; width:100%; height:220px; object-fit:cover"></div>
-        <div style="border-radius:12px; overflow:hidden; box-shadow:var(--shadow)"><img src="https://robotscolombia.com/fachadas/microperforada-personalizada.jpg" alt="ejemplo3" style="display:block; width:100%; height:220px; object-fit:cover"></div>
+    <section id="demo-section" aria-labelledby="demoTitle" style="margin-top:40px">
+      <h2 id="demoTitle" style="font-size:1.6rem; color:#042037; text-align:center; margin-bottom:10px;">
+        Ejemplos y resultados
+      </h2>
+      <p class="small muted" style="max-width:72ch; margin:0 auto; text-align:center; color:#667085;">
+        A continuación puedes ver ejemplos. Las fachadas microperforadas son tendencia y el corte robotizado abre posibilidades estéticas y funcionales.
+      </p>
+    
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:22px">
+        <a href="/maquinas-microperforado" style="border-radius:14px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.08); transition:transform 0.25s, box-shadow 0.25s;">
+          <img src="https://robotscolombia.com/fachadas/lamina-microperforada-laser.jpg" alt="ejemplo1" style="display:block; width:100%; height:240px; object-fit:cover;">
+        </a>
+        <a href="/maquinas-microperforado" style="border-radius:14px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.08); transition:transform 0.25s, box-shadow 0.25s;">
+          <img src="https://robotscolombia.com/fachadas/lamina-microperforada-personalizada2.jpg" alt="ejemplo2" style="display:block; width:100%; height:240px; object-fit:cover;">
+        </a>
+        <a href="/maquinas-microperforado" style="border-radius:14px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.08); transition:transform 0.25s, box-shadow 0.25s;">
+          <img src="https://robotscolombia.com/fachadas/microperforada-personalizada.jpg" alt="ejemplo3" style="display:block; width:100%; height:240px; object-fit:cover;">
+        </a>
+      </div>
+    
+      <div style="margin-top:28px; text-align:center;">
+        <a href="/maquinas-microperforado" 
+           style="display:inline-block; padding:14px 24px; border-radius:12px; background:linear-gradient(90deg,#0066cc,#00b7ff); 
+                  color:#fff; font-weight:600; text-decoration:none; box-shadow:0 8px 22px rgba(0,118,204,0.25); transition:transform 0.25s;">
+          Así se Fabrican las Láminas Microperforadas
+        </a>
       </div>
     </section>
     
