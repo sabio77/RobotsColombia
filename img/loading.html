@@ -45,5 +45,16 @@
   <div class="container">
     <div class="loader"></div>
   </div>
+
+  <script>
+    // Si usas el parámetro ?redirect= lo tomamos dinámico
+    const params = new URLSearchParams(window.location.search);
+    const destino = params.get("redirect") || "https://disenoy3d.com";
+
+    // Redirige después de 2 segundos
+    setTimeout(() => {
+      window.location.href = destino;
+    }, 2000);
+  </script>
 </body>
 </html>
