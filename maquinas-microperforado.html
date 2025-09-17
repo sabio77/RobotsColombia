@@ -58,6 +58,26 @@
     footer.foot{margin-top:18px; display:flex; justify-content:space-between; align-items:center; gap:10px; color:var(--muted); font-size:13px}
     .partner{display:flex;gap:8px;align-items:center}
     .partner img{height:36px; width:auto; border-radius:6px}
+
+    .video-hero{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      background:#000;
+      box-shadow:var(--shadow-deep);
+      border:1px solid rgba(2,6,23,0.04);
+    }
+    #videoHolderAds{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      background:#000;
+      user-select: none;     /* Evita selección de texto/contenedor */
+      pointer-events: none;  /* Bloquea clicks en el contenedor */
+    }
   </style>
 
   <!-- Structured data: Organization + Product + Breadcrumb + FAQ -->
@@ -149,7 +169,11 @@
       <div class="grid">
         <!-- Main content -->
         <article>
-          <div class="hero-img"><img src="https://mapsx.app/all/img/2.webp" alt="Máquina de microperforado con robot de corte láser"></div>
+          <div class="container">
+            <div class="video-hero" role="region" aria-label="Publicidad en video">
+              <div id="videoHolderAds" data-video-id="EFe4-ab1lBo"></div>
+            </div>
+          </div>
 
           <section class="section">
             <h2>Por qué elegir robots de corte láser para microperforado</h2>
@@ -258,6 +282,53 @@
       // Abre primero la página de loading en una nueva pestaña
       window.open("https://robotscolombia.com/img/loading.html?redirect=https://disenoy3d.com", "_blank");
     });
+
+    const VIDEO_ID = document.querySelector('#videoHolderAds')?.dataset?.videoId || '9V9YUSpmQgQ';
+    let player = null;
+
+    function loadYouTubeApi(){
+      return new Promise((resolve)=>{
+        if(window.YT && window.YT.Player){ resolve(); return; }
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api"; 
+        tag.async = true;
+        document.head.appendChild(tag);
+        window.onYouTubeIframeAPIReady = function(){ resolve(); };
+      });
+    }
+
+    async function initPlayer(){
+      await loadYouTubeApi();
+      try{
+        player = new YT.Player('videoHolderAds', {
+          height: '100%', width: '100%',
+          videoId: VIDEO_ID,
+          playerVars: {
+            autoplay: 1, controls: 0, mute: 1,
+            rel: 0, playsinline: 1, modestbranding: 1,
+            disablekb: 1, iv_load_policy: 3
+          },
+          events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange}
+        });
+      }catch(e){ console.error(e); }
+    }
+
+    function onPlayerReady(ev){
+      try{ ev.target.getIframe().style.pointerEvents = 'none'; }catch(e){}
+      try{ ev.target.playVideo(); }catch(e){}
+    }
+
+    function onPlayerStateChange(e){
+      if(e.data === YT.PlayerState.ENDED){
+        // Reinicia el video desde el inicio y lo reproduce
+        player.seekTo(0);
+        player.playVideo();
+        //en caso de redireccionar a tienda
+        // window.location.href = "https://mapsx.app";
+      }
+    }
+
+    initPlayer();
   </script>
 </body>
 </html>
