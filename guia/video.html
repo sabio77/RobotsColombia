@@ -236,6 +236,17 @@
                 <div style="font-size:12px;color:var(--muted);background:rgba(255,255,255,0.9);padding:6px 10px;border-radius:10px;border:1px solid rgba(2,6,23,0.04)">Patrocinado</div>
               </div>
             </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+              <div class="promo">
+                <h2>Promoción destacada</h2>
+                <p class="muted">Aprovecha esta oferta exclusiva mientras se reproduce el video.</p>
+              </div>
+              <div class="cta-actions">
+                <button id="learnBtn" class="btn ghost">Detalles</button>
+                <button id="visitBtn" class="btn primary">Visitar</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -310,8 +321,10 @@
        -------------------------- */
     const VIDEO_ID = document.querySelector('#videoHolder')?.dataset?.videoId || 'bCGGDeq6D3Y';
     const REDIRECT_URL = 'https://mapsx.app/publicidad';
+    const FALLBACK_REDIRECT_AFTER = 25; // segundos de fallback si la API falla
     let player = null;
     let progressInterval = null;
+    let fallbackTimer = null;
     let preventAutoRedirect = false; // true si el usuario presiona "Permanecer"
     const timeLeftEl = document.getElementById('timeLeft');
     const progressCircle = document.getElementById('progressCircle');
@@ -376,13 +389,18 @@
         tag.src = "https://www.youtube.com/iframe_api";
         tag.async = true;
         document.head.appendChild(tag);
-        window.onYouTubeIframeAPIReady = ()=>resolve();
-        setTimeout(()=>resolve(), 5000); // fallback por si la API no carga
+        // global callback required by YT
+        window.onYouTubeIframeAPIReady = function(){
+          resolve();
+        };
+        // safety fallback in case the script fails to load quickly
+        setTimeout(()=>resolve(), 5000);
       });
     }
 
     async function initPlayer(){
       await loadYouTubeApi();
+      // create player into 'videoHolder'
       try{
         player = new YT.Player('videoHolder', {
           height: '100%',
@@ -406,35 +424,62 @@
         });
       }catch(e){
         console.warn('YT init error', e);
-        redirectNow(); // fallback directo sin temporizador
+        startFallback();
       }
+
+      // fallback: if nothing happens, redirect after FALLBACK_REDIRECT_AFTER
+      fallbackTimer = setTimeout(()=>{
+        if(!player && !preventAutoRedirect) startFallback();
+      }, (FALLBACK_REDIRECT_AFTER * 1000));
     }
 
     function onPlayerReady(ev){
+      clearTimeout(fallbackTimer);
       try{
         const iframe = ev.target.getIframe();
-        if(iframe) iframe.style.pointerEvents = 'none';
+        if(iframe) iframe.style.pointerEvents = 'none'; // prevent pausing/clicking
       }catch(e){}
+      // attempt to play
       try{ ev.target.playVideo(); }catch(e){}
+      // start progress updater
       if(progressInterval) clearInterval(progressInterval);
       progressInterval = setInterval(()=>{
         try{
           const dur = player.getDuration();
           const cur = player.getCurrentTime();
           updateProgressUI(cur, dur);
-        }catch(e){}
+        }catch(e){ /* ignore until ready */ }
       }, 300);
     }
 
     function onPlayerStateChange(e){
+      // PLAYING = 1, PAUSED = 2, ENDED = 0
       if(e.data === YT.PlayerState.ENDED){
         if(!preventAutoRedirect) redirectNow();
+      }
+      if(e.data === YT.PlayerState.PLAYING){
+        clearTimeout(fallbackTimer);
       }
     }
 
     function onPlayerError(err){
       console.warn('YT player error', err);
-      if(!preventAutoRedirect) redirectNow();
+      // fallback: short delay then redirect (unless user asked to remain)
+      if(!preventAutoRedirect) setTimeout(()=>{ redirectNow(); }, 3000);
+    }
+
+    function startFallback(){
+      // show a short visible countdown and then redirect
+      let t = 6;
+      timeLeftEl.textContent = `00:0${t}`;
+      const fb = setInterval(()=>{
+        t--;
+        timeLeftEl.textContent = `00:0${t}`;
+        if(t<=0){
+          clearInterval(fb);
+          if(!preventAutoRedirect) redirectNow();
+        }
+      },1000);
     }
 
     /* --------------------------
@@ -475,6 +520,7 @@
     document.getElementById('contactSupport2').addEventListener('click', ()=> window.open('/soporte','_blank'));
     document.getElementById('openMapsx').addEventListener('click', ()=> window.open('https://mapsx.app','_blank'));
 
+    // keyboard shortcut S to skip
     document.addEventListener('keydown', (ev)=>{
       if(ev.key && ev.key.toLowerCase() === 's'){
         preventAutoRedirect = true;
@@ -482,13 +528,14 @@
       }
     });
 
+    // cleanup on unload
     window.addEventListener('beforeunload', ()=>{
       if(progressInterval) clearInterval(progressInterval);
+      if(fallbackTimer) clearTimeout(fallbackTimer);
     });
 
     /* INIT */
     initPlayer();
-</script>
-
+  </script>
 </body>
 </html>
