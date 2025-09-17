@@ -3,52 +3,318 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Publicidad - MapsX</title>
-  <style>
-    body,html{
-      margin:0;
+  <title>MapsX - Publicidad</title>
+  <meta name="theme-color" content="#0f172a">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --muted:#64748b;
+      --accent:#2563eb;
+      --accent-2:#4f46e5;
+      --radius:16px;
+      --shadow-soft:0 8px 30px rgba(16,24,40,0.06);
+      --shadow-deep:0 24px 60px rgba(16,24,40,0.08);
+      font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+    }
+
+    /* Base */
+    html,body{
       height:100%;
-      background:#000;
+      margin:0;
+      background:linear-gradient(180deg,#f8fbff,var(--bg));
+      color:#071033;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{
+      max-width:1200px;
+      margin:28px auto;
+      padding:20px;
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:26px;
+      align-items:start
+    }
+    header{
+      grid-column:1/-1;
       display:flex;
       align-items:center;
-      justify-content:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:8px
     }
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{
+      width:64px;height:64px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:800;font-size:20px;
+      box-shadow:0 12px 36px rgba(79,70,229,.14)
+    }
+    .title h1{margin:0;font-size:20px}
+    .title p{margin:3px 0 0 0;color:var(--muted);font-size:13px}
+
+    /* Main card */
+    .main-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow-soft);
+      display:flex;
+      flex-direction:column;
+      gap:14px
+    }
+    .main-grid{display:grid;grid-template-columns:440px 1fr;gap:20px;align-items:start}
+
+    /* HERO video */
     .hero{
       width:100%;
-      max-width:400px; /* ancho máximo opcional */
-      aspect-ratio:9/16; /* formato vertical */
-      background:#000;
+      aspect-ratio:1/2;
+      border-radius:14px;
+      overflow:hidden;
       position:relative;
-    }
-    #videoHolder{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
       background:#000;
+      box-shadow:var(--shadow-deep);
+      border:1px solid rgba(2,6,23,0.04);
+    }
+    #videoHolder{position:absolute;inset:0;width:100%;height:100%;background:#000}
+    .overlay{
+      position:absolute;inset:0;
+      padding:14px;
+      display:flex;flex-direction:column;justify-content:space-between;
+      z-index:6;pointer-events:none
+    }
+    .badge{
+      pointer-events:auto;
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border-radius:999px;
+      background:linear-gradient(90deg,rgba(255,255,255,0.92),rgba(255,255,255,0.86));
+      font-weight:700;font-size:13px;color:#06203a;
+      box-shadow:0 8px 30px rgba(2,6,23,0.06)
+    }
+    .promo{
+      pointer-events:auto;
+      background:linear-gradient(180deg,rgba(255,255,255,0.92), rgba(255,255,255,0.78));
+      padding:10px 12px;border-radius:12px;
+      backdrop-filter: blur(6px);
+      box-shadow:0 10px 30px rgba(2,6,23,0.06)
+    }
+    .promo h2{margin:0;font-size:18px;color:#04132a}
+    .promo p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+    .cta-actions{display:flex;flex-direction:column;gap:8px;pointer-events:auto}
+    .btn{
+      border:0;padding:10px 14px;border-radius:10px;
+      font-weight:700;cursor:pointer;font-size:14px;
+      transition:transform .18s,box-shadow .18s
+    }
+    .btn.small{padding:8px 10px;font-size:13px}
+    .btn.primary{
+      background:linear-gradient(180deg,var(--accent),var(--accent-2));
+      color:#fff;box-shadow:0 10px 30px rgba(79,70,229,.14)
+    }
+    .btn.ghost{
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(2,6,23,0.06);
+      color:#06203a
+    }
+    .btn:active{transform:translateY(1px)}
+
+    /* Right content */
+    .video-info{display:flex;flex-direction:column;gap:12px}
+    .meta-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .muted{color:var(--muted);font-size:13px}
+    .progress-wrap{
+      display:flex;align-items:center;gap:12px;
+      padding:10px;border-radius:12px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.88));
+      border:1px solid rgba(2,6,23,0.04)
+    }
+    .timer{font-weight:800;font-size:18px;color:#04263b}
+    svg{display:block}
+    #progressCircle{stroke-width:4;stroke-linecap:round;fill:none;stroke-dasharray:126;stroke-dashoffset:126}
+
+    /* Sidebar */
+    .side{display:flex;flex-direction:column;gap:18px}
+    .small-card{
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      box-shadow:var(--shadow-soft);
+      display:flex;flex-direction:column;gap:12px
+    }
+
+    /* AD grid adaptativo */
+    .ad-grid{
+      display:grid;
+      gap:10px;
+    }
+    /* Desktop (PC) → 1 columna */
+    @media (min-width:1041px){
+      .ad-grid{grid-template-columns:1fr;}
+    }
+    /* Tablet/Mobile → 2 columnas */
+    @media (max-width:1040px){
+      .ad-grid{grid-template-columns:1fr 1fr;}
+    }
+
+    .mini-ad{
+      position:relative;
+      border-radius:10px;
+      overflow:hidden;
+      min-height:100px;
+      background:#f8fafc
+    }
+    .mini-ad img{
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;z-index:1
+    }
+    .mini-ad .meta{
+      position:relative;z-index:2;
+      color:#fff;font-weight:700;
+      padding:8px;
+      text-shadow:0 2px 8px rgba(0,0,0,.45)
+    }
+
+    footer{
+      grid-column:1/-1;
+      text-align:center;color:var(--muted);
+      font-size:13px;margin-top:6px
+    }
+
+    /* Más responsive */
+    @media (max-width:1040px){
+      .container{grid-template-columns:1fr}
+      .main-grid{grid-template-columns:1fr;gap:12px}
+      .hero{aspect-ratio:9/16}
+    }
+    @media (max-width:640px){
+      .logo{width:48px;height:48px;font-size:16px}
+      .title h1{font-size:18px}
+      .promo h2{font-size:16px}
+      .promo p{font-size:12px}
+      .btn{font-size:13px;padding:8px 12px}
     }
   </style>
 </head>
 <body>
-  <!-- Contenedor del video -->
-  <div class="hero">
-    <div id="videoHolder" data-video-id="EFe4-ab1lBo"></div>
+  <div class="container">
+    <header>
+      
+      <div style="text-align:right;font-size:13px;color:var(--muted)">
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+          <div class="muted">Redirigir al terminar el video</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ghost small" id="stayBtn">Permanecer</button>
+            <button class="btn primary small" id="skipBtn">Ir ahora</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CARD (columna principal) -->
+    <section class="main-card" aria-labelledby="mainTitle">
+      <div class="main-grid">
+        <!-- HERO -->
+        <div class="hero" role="region" aria-label="Publicidad en video">
+          <div id="videoHolder" data-video-id="9V9YUSpmQgQ"></div>
+
+          <div class="overlay" aria-hidden="false">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="badge">Publicidad principal</span>
+              <div style="display:flex;gap:8px;align-items:center">
+                <div style="font-size:12px;color:var(--muted);background:rgba(255,255,255,0.9);padding:6px 10px;border-radius:10px;border:1px solid rgba(2,6,23,0.04)">Patrocinado</div>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+              <div class="promo">
+                <h2>Promoción destacada</h2>
+                <p class="muted">Aprovecha esta oferta exclusiva mientras se reproduce el video.</p>
+              </div>
+              <div class="cta-actions">
+                <button id="learnBtn" class="btn ghost">Detalles</button>
+                <button id="visitBtn" class="btn primary">Visitar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video info / progreso / acciones -->
+        <div class="video-info" aria-live="polite">
+          <div class="meta-top">
+            <div>
+              <div style="font-weight:800;font-size:15px">Publicidad principal</div>
+              <div class="muted" style="margin-top:6px">Se redirigirá al finalizar la reproducción.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
     /* --------------------------
        CONFIG
        -------------------------- */
-    const VIDEO_ID = document.querySelector('#videoHolder')?.dataset?.videoId || 'EFe4-ab1lBo';
+    const VIDEO_ID = document.querySelector('#videoHolder')?.dataset?.videoId || 'bCGGDeq6D3Y';
     const REDIRECT_URL = 'https://mapsx.app/publicidad';
     const FALLBACK_REDIRECT_AFTER = 25; // segundos de fallback si la API falla
     let player = null;
     let progressInterval = null;
     let fallbackTimer = null;
+    let preventAutoRedirect = false; // true si el usuario presiona "Permanecer"
+    const timeLeftEl = document.getElementById('timeLeft');
+    const progressCircle = document.getElementById('progressCircle');
+    const progressSVG = document.getElementById('progressRing');
 
     /* utility */
+    function formatTime(secs){
+      if(!isFinite(secs) || secs < 0) return '--:--';
+      const s = Math.max(0, Math.round(secs));
+      const mm = Math.floor(s/60).toString().padStart(2,'0');
+      const ss = (s%60).toString().padStart(2,'0');
+      return `${mm}:${ss}`;
+    }
     function redirectNow(){
       window.location.href = REDIRECT_URL;
+    }
+
+    /* attach gradient to svg progress ring */
+    (function attachGradient(){
+      if(!progressSVG) return;
+      const ns = 'http://www.w3.org/2000/svg';
+      const defs = document.createElementNS(ns,'defs');
+      const grad = document.createElementNS(ns,'linearGradient');
+      grad.setAttribute('id','grad');
+      grad.setAttribute('x1','0%'); grad.setAttribute('y1','0%');
+      grad.setAttribute('x2','100%'); grad.setAttribute('y2','0%');
+      const s1 = document.createElementNS(ns,'stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#2563eb');
+      const s2 = document.createElementNS(ns,'stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#4f46e5');
+      grad.appendChild(s1); grad.appendChild(s2);
+      defs.appendChild(grad);
+      progressSVG.prepend(defs);
+    })();
+
+    /* update progress UI based on current & duration */
+    function updateProgressUI(current,duration){
+      if(!duration || duration <= 0){
+        timeLeftEl.textContent = '--:--';
+        progressCircle.setAttribute('stroke-dasharray', 126);
+        progressCircle.setAttribute('stroke-dashoffset', 126);
+        return;
+      }
+      const remaining = Math.max(0, duration - current);
+      timeLeftEl.textContent = formatTime(remaining);
+      const r = 20;
+      const circumference = 2 * Math.PI * r;
+      const percent = Math.min(1, Math.max(0, current / duration));
+      const dashoffset = Math.round(circumference * (1 - percent));
+      progressCircle.setAttribute('stroke-dasharray', circumference);
+      progressCircle.setAttribute('stroke-dashoffset', dashoffset);
     }
 
     /* --------------------------
@@ -64,17 +330,18 @@
         tag.src = "https://www.youtube.com/iframe_api";
         tag.async = true;
         document.head.appendChild(tag);
-        // callback requerido por la API
+        // global callback required by YT
         window.onYouTubeIframeAPIReady = function(){
           resolve();
         };
-        // fallback si tarda demasiado
+        // safety fallback in case the script fails to load quickly
         setTimeout(()=>resolve(), 5000);
       });
     }
 
     async function initPlayer(){
       await loadYouTubeApi();
+      // create player into 'videoHolder'
       try{
         player = new YT.Player('videoHolder', {
           height: '100%',
@@ -101,9 +368,9 @@
         startFallback();
       }
 
-      // fallback si no arranca
+      // fallback: if nothing happens, redirect after FALLBACK_REDIRECT_AFTER
       fallbackTimer = setTimeout(()=>{
-        if(!player) startFallback();
+        if(!player && !preventAutoRedirect) startFallback();
       }, (FALLBACK_REDIRECT_AFTER * 1000));
     }
 
@@ -111,15 +378,25 @@
       clearTimeout(fallbackTimer);
       try{
         const iframe = ev.target.getIframe();
-        if(iframe) iframe.style.pointerEvents = 'none'; // no dejar pausar ni tocar
+        if(iframe) iframe.style.pointerEvents = 'none'; // prevent pausing/clicking
       }catch(e){}
+      // attempt to play
       try{ ev.target.playVideo(); }catch(e){}
+      // start progress updater
+      if(progressInterval) clearInterval(progressInterval);
+      progressInterval = setInterval(()=>{
+        try{
+          const dur = player.getDuration();
+          const cur = player.getCurrentTime();
+          updateProgressUI(cur, dur);
+        }catch(e){ /* ignore until ready */ }
+      }, 300);
     }
 
     function onPlayerStateChange(e){
-      // 0 = ENDED
+      // PLAYING = 1, PAUSED = 2, ENDED = 0
       if(e.data === YT.PlayerState.ENDED){
-        redirectNow();
+        if(!preventAutoRedirect) redirectNow();
       }
       if(e.data === YT.PlayerState.PLAYING){
         clearTimeout(fallbackTimer);
@@ -128,14 +405,71 @@
 
     function onPlayerError(err){
       console.warn('YT player error', err);
-      setTimeout(()=>{ redirectNow(); }, 3000);
+      // fallback: short delay then redirect (unless user asked to remain)
+      if(!preventAutoRedirect) setTimeout(()=>{ redirectNow(); }, 3000);
     }
 
     function startFallback(){
-      setTimeout(()=>{ redirectNow(); }, 5000);
+      // show a short visible countdown and then redirect
+      let t = 6;
+      timeLeftEl.textContent = `00:0${t}`;
+      const fb = setInterval(()=>{
+        t--;
+        timeLeftEl.textContent = `00:0${t}`;
+        if(t<=0){
+          clearInterval(fb);
+          if(!preventAutoRedirect) redirectNow();
+        }
+      },1000);
     }
 
-    // limpiar intervalos
+    /* --------------------------
+       Button handlers & bindings
+       -------------------------- */
+    document.getElementById('skipBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      preventAutoRedirect = true;
+      redirectNow();
+    });
+
+    document.getElementById('stayBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      preventAutoRedirect = true;
+      const b = e.currentTarget;
+      b.textContent = 'Permaneciendo';
+      b.disabled = true;
+      b.classList.add('disabled');
+    });
+
+    document.getElementById('visitBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      preventAutoRedirect = true;
+      window.open(REDIRECT_URL, '_blank');
+    });
+
+    document.getElementById('learnBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      window.open('/soporte', '_blank');
+    });
+
+    document.getElementById('reportLink').addEventListener('click', (e)=>{
+      e.preventDefault();
+      window.open('/soporte', '_blank');
+    });
+    document.getElementById('refreshBtn').addEventListener('click', ()=> location.reload());
+    document.getElementById('contactSupport').addEventListener('click', ()=> window.open('/soporte','_blank'));
+    document.getElementById('contactSupport2').addEventListener('click', ()=> window.open('/soporte','_blank'));
+    document.getElementById('openMapsx').addEventListener('click', ()=> window.open('https://mapsx.app','_blank'));
+
+    // keyboard shortcut S to skip
+    document.addEventListener('keydown', (ev)=>{
+      if(ev.key && ev.key.toLowerCase() === 's'){
+        preventAutoRedirect = true;
+        redirectNow();
+      }
+    });
+
+    // cleanup on unload
     window.addEventListener('beforeunload', ()=>{
       if(progressInterval) clearInterval(progressInterval);
       if(fallbackTimer) clearTimeout(fallbackTimer);
