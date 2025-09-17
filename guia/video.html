@@ -203,7 +203,14 @@
 <body>
   <div class="container">
     <header>
-      
+      <div class="brand">
+        <div class="logo">RD</div>
+        <div class="title">
+          <h1>Esto Podria Interesarte</h1>
+          <p class="muted">Publicidad relevante — al finalizar se redirige automáticamente.</p>
+        </div>
+      </div>
+
       <div style="text-align:right;font-size:13px;color:var(--muted)">
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
           <div class="muted">Redirigir al terminar el video</div>
@@ -250,10 +257,62 @@
               <div style="font-weight:800;font-size:15px">Publicidad principal</div>
               <div class="muted" style="margin-top:6px">Se redirigirá al finalizar la reproducción.</div>
             </div>
+            <div class="progress-wrap" aria-hidden="false">
+              <svg id="progressRing" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="Progreso">
+                <circle cx="24" cy="24" r="20" stroke="rgba(2,6,23,0.06)" stroke-width="4" fill="none"></circle>
+                <circle id="progressCircle" cx="24" cy="24" r="20" stroke="url(#grad) " stroke-width="4" fill="none" transform="rotate(-90 24 24)"></circle>
+              </svg>
+              <div>
+                <div class="timer" id="timeLeft">--:--</div>
+                <div class="muted" style="font-size:12px">Tiempo restante</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <div style="font-size:14px">Mostrando <strong>4</strong> anuncios patrocinados</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn ghost" id="reportLink">Reportar</button>
+              <button class="btn ghost" id="refreshBtn">Reintentar</button>
+              <button class="btn ghost" id="contactSupport">Soporte</button>
+            </div>
+          </div>
+
+          <div style="margin-top:auto;color:var(--muted);font-size:13px">
+            <small>Consejo: presiona <kbd>S</kbd> para saltar a la redirección.</small>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- SIDEBAR -->
+    <aside class="side" aria-label="Anuncios secundarios">
+      <div class="small-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-weight:800">Anuncios secundarios</div>
+          <div class="muted">Patrocinados</div>
+        </div>
+        <div class="ad-grid">
+          <div class="mini-ad"><img src="https://mapsx.app/all/img/2.webp" alt="Producto A"><div class="meta">Producto A</div></div>
+          <div class="mini-ad"><img src="https://mapsx.app/all/img/2.webp" alt="Servicio B"><div class="meta">Servicio B</div></div>
+          <div class="mini-ad"><img src="https://mapsx.app/all/img/2.webp" alt="App C"><div class="meta">App C</div></div>
+          <div class="mini-ad"><img src="https://mapsx.app/all/img/2.webp" alt="Servicio D"><div class="meta">Servicio D</div></div>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <div style="font-weight:800">Estado</div>
+        <p style="margin:0;color:var(--muted);font-size:14px">Exceso de solicitudes temporal — redirigiendo de forma segura cuando termine el video.</p>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn ghost" id="contactSupport2">Contactar</button>
+          <button class="btn primary" id="openMapsx">Abrir MapsX App</button>
+        </div>
+      </div>
+    </aside>
+
+    <footer>
+      <small>Si el problema persiste contacta con soporte. Gracias por tu visita.</small>
+    </footer>
   </div>
 
   <script>
