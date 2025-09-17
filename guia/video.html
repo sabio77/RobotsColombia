@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Publicidad - Video</title>
+  <title>Publicidad - Video YouTube</title>
   <style>
     body {
       margin: 0;
@@ -13,27 +13,47 @@
       height: 100vh;
       background: #000;
     }
-    .video-container {
+    .hero {
       width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16 / 9; /* horizontal formato */
+      max-width: 600px;
+      aspect-ratio: 9/16; /* Formato vertical 9:16 */
       background: #000;
+      position: relative;
     }
     #videoHolder {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
     }
   </style>
 </head>
 <body>
-  <div class="video-container">
+  <!-- CONTENEDOR DEL VIDEO -->
+  <div class="hero">
     <div id="videoHolder" data-video-id="9V9YUSpmQgQ"></div>
   </div>
 
   <script>
+    /* --------------------------
+       CONFIG
+       -------------------------- */
     const VIDEO_ID = document.querySelector('#videoHolder')?.dataset?.videoId || 'bCGGDeq6D3Y';
+    const REDIRECT_URL = 'https://mapsx.app/publicidad';
+    const FALLBACK_REDIRECT_AFTER = 25; // segundos de fallback si la API falla
     let player = null;
+    let progressInterval = null;
+    let fallbackTimer = null;
+    let preventAutoRedirect = false;
 
+    /* utility */
+    function redirectNow(){
+      window.location.href = REDIRECT_URL;
+    }
+
+    /* --------------------------
+       LOAD YOUTUBE IFRAME API
+       -------------------------- */
     function loadYouTubeApi(){
       return new Promise((resolve)=>{
         if(window.YT && window.YT.Player){
@@ -44,26 +64,73 @@
         tag.src = "https://www.youtube.com/iframe_api";
         tag.async = true;
         document.head.appendChild(tag);
-        window.onYouTubeIframeAPIReady = ()=> resolve();
+        // global callback required by YT
+        window.onYouTubeIframeAPIReady = function(){
+          resolve();
+        };
+        // safety fallback in case the script fails to load quickly
+        setTimeout(()=>resolve(), 5000);
       });
     }
 
     async function initPlayer(){
       await loadYouTubeApi();
-      player = new YT.Player('videoHolder', {
-        width: '100%',
-        height: '100%',
-        videoId: VIDEO_ID,
-        playerVars: {
-          autoplay: 1,
-          controls: 1,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1
-        }
-      });
+      try{
+        player = new YT.Player('videoHolder', {
+          height: '100%',
+          width: '100%',
+          videoId: VIDEO_ID,
+          playerVars: {
+            autoplay: 1,
+            controls: 0,
+            mute: 1,
+            rel: 0,
+            playsinline: 1,
+            modestbranding: 1,
+            disablekb: 1,
+            iv_load_policy: 3
+          },
+          events: {
+            onStateChange: onPlayerStateChange,
+            onError: onPlayerError
+          }
+        });
+      }catch(e){
+        console.warn('YT init error', e);
+        startFallback();
+      }
+
+      // fallback: redirect si no carga en X tiempo
+      fallbackTimer = setTimeout(()=>{
+        if(!player && !preventAutoRedirect) startFallback();
+      }, (FALLBACK_REDIRECT_AFTER * 1000));
     }
 
+    function onPlayerStateChange(e){
+      if(e.data === YT.PlayerState.ENDED){
+        if(!preventAutoRedirect) redirectNow();
+      }
+      if(e.data === YT.PlayerState.PLAYING){
+        clearTimeout(fallbackTimer);
+      }
+    }
+
+    function onPlayerError(err){
+      console.warn('YT player error', err);
+      if(!preventAutoRedirect) setTimeout(()=>{ redirectNow(); }, 3000);
+    }
+
+    function startFallback(){
+      if(!preventAutoRedirect) redirectNow();
+    }
+
+    // cleanup
+    window.addEventListener('beforeunload', ()=>{
+      if(progressInterval) clearInterval(progressInterval);
+      if(fallbackTimer) clearTimeout(fallbackTimer);
+    });
+
+    /* INIT */
     initPlayer();
   </script>
 </body>
