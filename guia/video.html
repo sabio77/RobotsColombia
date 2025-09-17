@@ -3,35 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Publicidad - Video YouTube</title>
+  <title>Publicidad - MapsX</title>
   <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #000;
+    body,html{
+      margin:0;
+      height:100%;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    .hero {
-      width: 100%;
-      max-width: 600px;
-      aspect-ratio: 9/16; /* Formato vertical 9:16 */
-      background: #000;
-      position: relative;
+    .hero{
+      width:100%;
+      max-width:400px; /* ancho máximo opcional */
+      aspect-ratio:9/16; /* formato vertical */
+      background:#000;
+      position:relative;
     }
-    #videoHolder {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+    #videoHolder{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      background:#000;
     }
   </style>
 </head>
 <body>
-  <!-- CONTENEDOR DEL VIDEO -->
+  <!-- Contenedor del video -->
   <div class="hero">
-    <div id="videoHolder" data-video-id="EFe4-ab1lBo"></div>
+    <div id="videoHolder" data-video-id="9V9YUSpmQgQ"></div>
   </div>
 
   <script>
@@ -44,7 +45,6 @@
     let player = null;
     let progressInterval = null;
     let fallbackTimer = null;
-    let preventAutoRedirect = false;
 
     /* utility */
     function redirectNow(){
@@ -64,11 +64,11 @@
         tag.src = "https://www.youtube.com/iframe_api";
         tag.async = true;
         document.head.appendChild(tag);
-        // global callback required by YT
+        // callback requerido por la API
         window.onYouTubeIframeAPIReady = function(){
           resolve();
         };
-        // safety fallback in case the script fails to load quickly
+        // fallback si tarda demasiado
         setTimeout(()=>resolve(), 5000);
       });
     }
@@ -91,6 +91,7 @@
             iv_load_policy: 3
           },
           events: {
+            onReady: onPlayerReady,
             onStateChange: onPlayerStateChange,
             onError: onPlayerError
           }
@@ -100,15 +101,25 @@
         startFallback();
       }
 
-      // fallback: redirect si no carga en X tiempo
+      // fallback si no arranca
       fallbackTimer = setTimeout(()=>{
-        if(!player && !preventAutoRedirect) startFallback();
+        if(!player) startFallback();
       }, (FALLBACK_REDIRECT_AFTER * 1000));
     }
 
+    function onPlayerReady(ev){
+      clearTimeout(fallbackTimer);
+      try{
+        const iframe = ev.target.getIframe();
+        if(iframe) iframe.style.pointerEvents = 'none'; // no dejar pausar ni tocar
+      }catch(e){}
+      try{ ev.target.playVideo(); }catch(e){}
+    }
+
     function onPlayerStateChange(e){
+      // 0 = ENDED
       if(e.data === YT.PlayerState.ENDED){
-        if(!preventAutoRedirect) redirectNow();
+        redirectNow();
       }
       if(e.data === YT.PlayerState.PLAYING){
         clearTimeout(fallbackTimer);
@@ -117,14 +128,14 @@
 
     function onPlayerError(err){
       console.warn('YT player error', err);
-      if(!preventAutoRedirect) setTimeout(()=>{ redirectNow(); }, 3000);
+      setTimeout(()=>{ redirectNow(); }, 3000);
     }
 
     function startFallback(){
-      if(!preventAutoRedirect) redirectNow();
+      setTimeout(()=>{ redirectNow(); }, 5000);
     }
 
-    // cleanup
+    // limpiar intervalos
     window.addEventListener('beforeunload', ()=>{
       if(progressInterval) clearInterval(progressInterval);
       if(fallbackTimer) clearTimeout(fallbackTimer);
