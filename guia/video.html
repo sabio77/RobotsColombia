@@ -11,64 +11,24 @@
     :root{
       --bg:#f4f7fb;
       --card:#ffffff;
-      --muted:#64748b;
-      --accent:#2563eb;
-      --accent-2:#4f46e5;
       --radius:16px;
-      --shadow-soft:0 8px 30px rgba(16,24,40,0.06);
       --shadow-deep:0 24px 60px rgba(16,24,40,0.08);
       font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
     }
-
     html,body{
       height:100%;
       margin:0;
       background:linear-gradient(180deg,#f8fbff,var(--bg));
       color:#071033;
     }
-    a{color:inherit;text-decoration:none}
     .container{
-      max-width:1200px;
+      max-width:800px;
       margin:28px auto;
       padding:20px;
-      display:grid;
-      grid-template-columns:1fr 360px;
-      gap:26px;
-      align-items:start
     }
-    header{
-      grid-column:1/-1;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:8px
-    }
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{
-      width:64px;height:64px;
-      border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;
-      color:#fff;font-weight:800;font-size:20px;
-      box-shadow:0 12px 36px rgba(79,70,229,.14)
-    }
-    .title h1{margin:0;font-size:20px}
-    .title p{margin:3px 0 0 0;color:var(--muted);font-size:13px}
-
-    .main-card{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow-soft);
-      display:flex;
-      flex-direction:column;
-      gap:14px
-    }
-    .main-grid{display:grid;grid-template-columns:440px 1fr;gap:20px;align-items:start}
-
     .hero{
       width:100%;
-      aspect-ratio:1/2;
+      aspect-ratio:16/9;
       border-radius:14px;
       overflow:hidden;
       position:relative;
@@ -76,152 +36,34 @@
       box-shadow:var(--shadow-deep);
       border:1px solid rgba(2,6,23,0.04);
     }
-    #videoHolder{position:absolute;inset:0;width:100%;height:100%;background:#000}
-    .overlay{
-      position:absolute;inset:0;
-      padding:14px;
-      display:flex;flex-direction:column;justify-content:space-between;
-      z-index:6;pointer-events:none
-    }
-    .badge{
-      display:inline-flex;gap:8px;align-items:center;
-      padding:8px 12px;border-radius:999px;
-      background:linear-gradient(90deg,rgba(255,255,255,0.92),rgba(255,255,255,0.86));
-      font-weight:700;font-size:13px;color:#06203a;
-    }
-
-    .video-info{display:flex;flex-direction:column;gap:12px}
-    .meta-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .muted{color:var(--muted);font-size:13px}
-    .progress-wrap{
-      display:flex;align-items:center;gap:12px;
-      padding:10px;border-radius:12px;
-      background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.88));
-      border:1px solid rgba(2,6,23,0.04)
-    }
-    .timer{font-weight:800;font-size:18px;color:#04263b}
-    svg{display:block}
-    #progressCircle{stroke-width:4;stroke-linecap:round;fill:none;stroke-dasharray:126;stroke-dashoffset:126}
-
-    footer{
-      grid-column:1/-1;
-      text-align:center;color:var(--muted);
-      font-size:13px;margin-top:6px
-    }
-
-    @media (max-width:1040px){
-      .container{grid-template-columns:1fr}
-      .main-grid{grid-template-columns:1fr;gap:12px}
-      .hero{aspect-ratio:9/16}
+    #videoHolder{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      background:#000;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="brand">
-        <div class="logo">RD</div>
-        <div class="title">
-          <h1>Esto Podria Interesarte</h1>
-          <p class="muted">Publicidad relevante — al finalizar se redirige automáticamente.</p>
-        </div>
-      </div>
-    </header>
-
-    <section class="main-card" aria-labelledby="mainTitle">
-      <div class="main-grid">
-        <div class="hero" role="region" aria-label="Publicidad en video">
-          <div id="videoHolder" data-video-id="9V9YUSpmQgQ"></div>
-          <div class="overlay" aria-hidden="false">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <span class="badge">Publicidad principal</span>
-              <div style="font-size:12px;color:var(--muted);background:rgba(255,255,255,0.9);padding:6px 10px;border-radius:10px;">Patrocinado</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="video-info" aria-live="polite">
-          <div class="meta-top">
-            <div>
-              <div style="font-weight:800;font-size:15px">Publicidad principal</div>
-              <div class="muted" style="margin-top:6px">Se redirigirá al finalizar la reproducción.</div>
-            </div>
-            <div class="progress-wrap">
-              <svg id="progressRing" width="48" height="48" viewBox="0 0 48 48">
-                <circle cx="24" cy="24" r="20" stroke="rgba(2,6,23,0.06)" stroke-width="4" fill="none"></circle>
-                <circle id="progressCircle" cx="24" cy="24" r="20" stroke="url(#grad)" stroke-width="4" fill="none" transform="rotate(-90 24 24)"></circle>
-              </svg>
-              <div>
-                <div class="timer" id="timeLeft">--:--</div>
-                <div class="muted" style="font-size:12px">Tiempo restante</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <small>Si el problema persiste contacta con soporte. Gracias por tu visita.</small>
-    </footer>
+    <div class="hero" role="region" aria-label="Publicidad en video">
+      <div id="videoHolder" data-video-id="9V9YUSpmQgQ"></div>
+    </div>
   </div>
 
   <script>
     const VIDEO_ID = document.querySelector('#videoHolder')?.dataset?.videoId || 'bCGGDeq6D3Y';
-    const REDIRECT_URL = 'https://mapsx.app/publicidad';
-    let player = null, progressInterval = null, fallbackTimer = null;
-    const timeLeftEl = document.getElementById('timeLeft');
-    const progressCircle = document.getElementById('progressCircle');
-    const progressSVG = document.getElementById('progressRing');
-
-    function formatTime(secs){
-      if(!isFinite(secs) || secs < 0) return '--:--';
-      const s = Math.max(0, Math.round(secs));
-      const mm = Math.floor(s/60).toString().padStart(2,'0');
-      const ss = (s%60).toString().padStart(2,'0');
-      return `${mm}:${ss}`;
-    }
-    function redirectNow(){ window.location.href = REDIRECT_URL; }
-
-    (function attachGradient(){
-      if(!progressSVG) return;
-      const ns = 'http://www.w3.org/2000/svg';
-      const defs = document.createElementNS(ns,'defs');
-      const grad = document.createElementNS(ns,'linearGradient');
-      grad.setAttribute('id','grad');
-      grad.setAttribute('x1','0%'); grad.setAttribute('y1','0%');
-      grad.setAttribute('x2','100%'); grad.setAttribute('y2','0%');
-      const s1 = document.createElementNS(ns,'stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#2563eb');
-      const s2 = document.createElementNS(ns,'stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#4f46e5');
-      grad.appendChild(s1); grad.appendChild(s2);
-      defs.appendChild(grad);
-      progressSVG.prepend(defs);
-    })();
-
-    function updateProgressUI(current,duration){
-      if(!duration || duration <= 0){
-        timeLeftEl.textContent = '--:--';
-        progressCircle.setAttribute('stroke-dasharray', 126);
-        progressCircle.setAttribute('stroke-dashoffset', 126);
-        return;
-      }
-      const remaining = Math.max(0, duration - current);
-      timeLeftEl.textContent = formatTime(remaining);
-      const r = 20, circumference = 2 * Math.PI * r;
-      const percent = Math.min(1, Math.max(0, current / duration));
-      const dashoffset = Math.round(circumference * (1 - percent));
-      progressCircle.setAttribute('stroke-dasharray', circumference);
-      progressCircle.setAttribute('stroke-dashoffset', dashoffset);
-    }
+    let player = null;
 
     function loadYouTubeApi(){
       return new Promise((resolve)=>{
         if(window.YT && window.YT.Player){ resolve(); return; }
         const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api"; tag.async = true;
+        tag.src = "https://www.youtube.com/iframe_api"; 
+        tag.async = true;
         document.head.appendChild(tag);
         window.onYouTubeIframeAPIReady = function(){ resolve(); };
-        setTimeout(()=>resolve(), 5000);
       });
     }
 
@@ -236,43 +78,15 @@
             rel: 0, playsinline: 1, modestbranding: 1,
             disablekb: 1, iv_load_policy: 3
           },
-          events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
+          events: { onReady: onPlayerReady }
         });
-      }catch(e){ startFallback(); }
-
-      fallbackTimer = setTimeout(()=>{ if(!player) startFallback(); }, 25000);
+      }catch(e){ console.error(e); }
     }
 
     function onPlayerReady(ev){
-      clearTimeout(fallbackTimer);
       try{ ev.target.getIframe().style.pointerEvents = 'none'; }catch(e){}
       try{ ev.target.playVideo(); }catch(e){}
-      if(progressInterval) clearInterval(progressInterval);
-      progressInterval = setInterval(()=>{
-        try{ updateProgressUI(player.getCurrentTime(), player.getDuration()); }catch(e){}
-      }, 300);
     }
-
-    function onPlayerStateChange(e){
-      if(e.data === YT.PlayerState.ENDED) redirectNow();
-      if(e.data === YT.PlayerState.PLAYING) clearTimeout(fallbackTimer);
-    }
-
-    function onPlayerError(){ setTimeout(()=>{ redirectNow(); }, 3000); }
-
-    function startFallback(){
-      let t = 6;
-      timeLeftEl.textContent = `00:0${t}`;
-      const fb = setInterval(()=>{
-        t--; timeLeftEl.textContent = `00:0${t}`;
-        if(t<=0){ clearInterval(fb); redirectNow(); }
-      },1000);
-    }
-
-    window.addEventListener('beforeunload', ()=>{
-      if(progressInterval) clearInterval(progressInterval);
-      if(fallbackTimer) clearTimeout(fallbackTimer);
-    });
 
     initPlayer();
   </script>
