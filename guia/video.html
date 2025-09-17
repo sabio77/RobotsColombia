@@ -26,7 +26,10 @@
       margin:28px auto;
       padding:20px;
     }
-    .hero{
+
+
+    
+    .video-hero{
       width:100%;
       aspect-ratio:16/9;
       border-radius:14px;
@@ -36,7 +39,7 @@
       box-shadow:var(--shadow-deep);
       border:1px solid rgba(2,6,23,0.04);
     }
-    #videoHolder{
+    #videoHolderAds{
       position:absolute;
       inset:0;
       width:100%;
@@ -49,13 +52,13 @@
 </head>
 <body>
   <div class="container">
-    <div class="hero" role="region" aria-label="Publicidad en video">
-      <div id="videoHolder" data-video-id="EFe4-ab1lBo"></div>
+    <div class="video-hero" role="region" aria-label="Publicidad en video">
+      <div id="videoHolderAds" data-video-id="EFe4-ab1lBo"></div>
     </div>
   </div>
 
   <script>
-    const VIDEO_ID = document.querySelector('#videoHolder')?.dataset?.videoId || '9V9YUSpmQgQ';
+    const VIDEO_ID = document.querySelector('#videoHolderAds')?.dataset?.videoId || '9V9YUSpmQgQ';
     let player = null;
 
     function loadYouTubeApi(){
@@ -72,7 +75,7 @@
     async function initPlayer(){
       await loadYouTubeApi();
       try{
-        player = new YT.Player('videoHolder', {
+        player = new YT.Player('videoHolderAds', {
           height: '100%', width: '100%',
           videoId: VIDEO_ID,
           playerVars: {
