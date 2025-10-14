@@ -53,14 +53,16 @@
   <meta name="geo.position" content="4.570868;-75.570826" />
   <meta name="ICBM" content="6.251308, -74.297333" />
 
+  <!-- Schema: Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://robotscolombia.com/#organization",
     "name": "Robots Colombia",
     "url": "https://robotscolombia.com",
     "logo": "https://robotscolombia.com/img/robots-colombia.webp",
-    "image": "https://robotscolombia.com/img/robot-corte-laser.webp",
+    "image": "https://robotscolombia.com/img/robots-colombia.webp",
     "description": "Robots Colombia es líder en venta de robots de corte láser y soldadura láser en Colombia, con soluciones industriales de precisión y automatización avanzada.",
     "sameAs": [
       "https://www.facebook.com/robotscolombia",
@@ -70,16 +72,15 @@
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+57 312 000 0000",
+      "telephone": "+57 312 752 8322",
       "contactType": "Atención al cliente",
       "areaServed": "CO",
       "availableLanguage": "es"
     }
   }
   </script>
-
-
-  <!-- Datos estructurados (Product) -->
+  
+  <!-- Schema: Product -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -87,12 +88,7 @@
     "name": "Robots de Corte Láser y Soldadura Láser",
     "image": "https://robotscolombia.com/img/robots-colombia.webp",
     "description": "Venta de robots industriales en Colombia especializados en corte láser y soldadura láser. Tecnología de alta precisión para la industria.",
-    "brand": {
-      "@type": "Organization",
-      "name": "Robots Colombia",
-      "logo": "https://robotscolombia.com/img/robots-colombia.webp",
-      "url": "https://robotscolombia.com"
-    },
+    "brand": { "@id": "https://robotscolombia.com/#organization" },
     "offers": {
       "@type": "Offer",
       "url": "https://robotscolombia.com/#productos",
@@ -113,12 +109,14 @@
     }
   }
   </script>
-
-  <!-- Datos estructurados (LocalBusiness) -->
+  
+  <!-- Schema: LocalBusiness -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://robotscolombia.com/#localbusiness",
+    "parentOrganization": { "@id": "https://robotscolombia.com/#organization" },
     "name": "Robots Colombia",
     "image": "https://robotscolombia.com/img/robots-colombia.webp",
     "address": {
@@ -140,45 +138,6 @@
   }
   </script>
 
-  <!-- Datos estructurados (WebSite + WebPage) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://robotscolombia.com/#website",
-        "url": "https://robotscolombia.com/",
-        "name": "Robots Colombia",
-        "publisher": {
-          "@id": "https://robotscolombia.com/#organization"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://robotscolombia.com/?s={search_term_string}",
-          "query-input": "required name=search_term_string"
-        },
-        "inLanguage": "es"
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://robotscolombia.com/#webpage",
-        "url": "https://robotscolombia.com/",
-        "name": "Venta de Robots de Corte Láser y Soldadura Láser en Colombia",
-        "isPartOf": {
-          "@id": "https://robotscolombia.com/#website"
-        },
-        "about": {
-          "@id": "https://robotscolombia.com/#organization"
-        },
-        "datePublished": "2025-01-01T00:00:00+00:00",
-        "dateModified": "2025-09-11T00:00:00+00:00",
-        "description": "Robots Colombia es líder en venta de robots de corte láser y soldadura láser en Colombia. Soluciones industriales de alta precisión y automatización.",
-        "inLanguage": "es"
-      }
-    ]
-  }
-  </script>
 
   <!-- Google Analytics 4 (gtag.js) - Google tag-->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-176T2X93N3"></script>
