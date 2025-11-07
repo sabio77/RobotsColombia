@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://robotscolombia.com/sitemap.xml
+Sitemap: https://robotscolombia.com/page-sitemap.xml
