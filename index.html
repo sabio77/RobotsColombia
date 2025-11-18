@@ -693,14 +693,25 @@
     })();
 
 	document.getElementById("abrirChatExtra").addEventListener("click", () => {
-	  const buscarBtn = setInterval(() => {
-	    const btn = document.querySelector(".mapsx-float-btn");
-	    if (btn) {
-	      btn.click();
-	      clearInterval(buscarBtn);
+	  const btn = document.querySelector(".mapsx-float-btn");
+	  
+	  if (btn) {
+	    btn.click();
+	    return;
+	  }
+	
+	  // Observar el DOM hasta que aparezca
+	  const obs = new MutationObserver(() => {
+	    const btnNow = document.querySelector(".mapsx-float-btn");
+	    if (btnNow) {
+	      btnNow.click();
+	      obs.disconnect();
 	    }
-	  }, 50);
+	  });
+	
+	  obs.observe(document.body, { childList: true, subtree: true });
 	});
+
 
 
 
