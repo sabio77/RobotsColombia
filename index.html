@@ -693,11 +693,15 @@
     })();
 
 	document.getElementById("abrirChatExtra").addEventListener("click", () => {
-	  const btn = document.querySelector(".mapsx-float-btn");
-	  if (btn) {
-		btn.click();
-	  }
+	  const buscarBtn = setInterval(() => {
+	    const btn = document.querySelector(".mapsx-float-btn");
+	    if (btn) {
+	      btn.click();
+	      clearInterval(buscarBtn);
+	    }
+	  }, 50);
 	});
+
 
 
     document.addEventListener("DOMContentLoaded", function(){
