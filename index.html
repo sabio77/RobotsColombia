@@ -596,7 +596,18 @@
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- CONTACTO -->
+    <section id="contact" class="section aos-init aos-animate" data-aos="fade-up" style="text-align:center; padding:80px 20px;">
+      <div style="max-width:600px;margin:auto;background:rgba(255,255,255,0.7);backdrop-filter:blur(16px);border-radius:24px;box-shadow:rgba(0,0,0,0.1) 0px 8px 32px;padding:40px 30px;transition:transform .3s;transform:scale(1);" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        <h2 style="font-size:1.8em;color:#1e3a8a;margin-bottom:10px;" data-t="contactH">¿Necesitas ayuda o más información?</h2>
+        <p style="font-size:1.1em;color:#334155;margin-bottom:30px;" data-t="contactLead">Contactanos y te daremos mas informacion sobre nuestros Robots Industriales Eespecializados.</p>
+        <button id="abrirChatExtra" style="background:linear-gradient(90deg,#3b82f6,#1e40af);border:none;padding:14px 40px;color:#fff;font-size:1.05em;font-weight:600;border-radius:9999px;cursor:pointer;box-shadow:0 4px 12px rgba(59,130,246,0.4);transition:all .3s ease;" onmouseover="this.style.boxShadow='0 6px 18px rgba(59,130,246,0.6)'" onmouseout="this.style.boxShadow='0 4px 12px rgba(59,130,246,0.4)'" data-t="contactBtn">>>>
+          Contactar Aqui
+        </button>
+      </div>
+    </section>
+
+    <!-- Contact 
     <section id="contacto" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contáctanos y solicita tu cotización</h2>
 
@@ -605,7 +616,6 @@
           <p class="small muted">Déjanos tus datos y te contactamos en menos de 24 horas con una propuesta a medida.</p>
           
           <form id="contactForm" action="https://formsubmit.co/disenoy3d.c.a@gmail.com" method="POST" class="contact-form" onsubmit="alert('✅ Gracias — pronto te contactaremos');">
-            <!-- 👇 Aquí defines el asunto fijo -->
             <input type="hidden" name="_subject" id="subjectField" value="COTIZACION | RobotsColombia.com">
             
             <div class="field">
@@ -629,7 +639,6 @@
               <textarea id="cmessage" name="mensaje" placeholder="Cuéntanos tu necesidad, tamaño de lámina, material, etc." required></textarea>
             </div>
             
-            <!-- Opcional: evita SPAM -->
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://robotscolombia.com">
             <button type="submit" class="btn-primary">Enviar Solicitud</button>
@@ -643,7 +652,7 @@
           <div style="margin-top:12px"><a class="btn-primary" href="https://wa.me/573127528322" target="_blank">Hablar por WhatsApp</a></div>
         </aside>
       </div>
-    </section>
+    </section>-->
 
     <footer class="site" role="contentinfo">
       <div>© <span id="yearFoot"></span> Robots Colombia — Innovación en Robótica</div>
@@ -755,6 +764,13 @@
     const mo = new MutationObserver(() => rebuildGallery());
     mo.observe(gallery, { childList: true, subtree: true });
   });
+
+  document.getElementById("abrirChatExtra").addEventListener("click", () => {
+	  const btn = document.querySelector(".mapsx-float-btn");
+	  if (btn) {
+	    btn.click();
+	  }
+	});
   </script>
 </body>
 </html>
