@@ -158,7 +158,7 @@
       // send_page_view: false          // descomenta si tu app es SPA y quieres controlar page_view manualmente
     });
   </script>
-  <script src="https://mapsx.app/chat-ia" data-source="mapsx" async></script>
+  <script src="https://mapsx.app/chat-ia" data-source="mapsx" async=""></script>
 
     <style>
       :root{
@@ -667,14 +667,14 @@
 
   <script>
     //inicio agrega numero a asunto-----------------
-    const form = document.getElementById('contactForm');
+    /*const form = document.getElementById('contactForm');
     const subjectInput = document.getElementById('subjectField');
     const whatsappInput = document.getElementById('whatsapp');
     
     form.addEventListener('submit', () => {
       const numero = whatsappInput.value;
       subjectInput.value = `COTIZACION | RobotsColombia.com | WhatsApp: ${numero}`;
-    });
+    });*/
     //fin agrega numero a asunto-----------------
     
     // Ajuste año
@@ -714,25 +714,24 @@
 
 
 
-
-    document.addEventListener("DOMContentLoaded", function(){
-    document.querySelectorAll(".yt-video").forEach(function(el){
-      let videoId = el.getAttribute("data-id");
-      let iframe = document.createElement("iframe");
-      iframe.setAttribute("src", 
-        "https://www.youtube.com/embed/" + videoId + 
-        "?autoplay=1&mute=1&controls=0&loop=1&playlist=" + videoId + 
-        "&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0"
-      );
-      iframe.setAttribute("title", "Video publicitario Robots Colombia");
-      iframe.setAttribute("frameborder", "0");
-      iframe.setAttribute("allow", "autoplay; encrypted-media");
-      iframe.setAttribute("allowfullscreen", "true");
-      iframe.style.width = "100%";
-      iframe.style.aspectRatio = "1/1.5"; // o "1/2" para vertical
-      iframe.style.border = "0";
-      el.appendChild(iframe);
-    });
+	document.addEventListener("DOMContentLoaded", function(){
+		document.querySelectorAll(".yt-video").forEach(function(el){
+		  let videoId = el.getAttribute("data-id");
+		  let iframe = document.createElement("iframe");
+		  iframe.setAttribute("src", 
+			"https://www.youtube.com/embed/" + videoId + 
+			"?autoplay=1&mute=1&controls=0&loop=1&playlist=" + videoId + 
+			"&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0"
+		  );
+		  iframe.setAttribute("title", "Video publicitario Robots Colombia");
+		  iframe.setAttribute("frameborder", "0");
+		  iframe.setAttribute("allow", "autoplay; encrypted-media");
+		  iframe.setAttribute("allowfullscreen", "true");
+		  iframe.style.width = "100%";
+		  iframe.style.aspectRatio = "1/1.5"; // o "1/2" para vertical
+		  iframe.style.border = "0";
+		  el.appendChild(iframe);
+		});
   });
 
 
